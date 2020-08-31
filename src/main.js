@@ -7,6 +7,8 @@ import "amfe-flexible";
 import './assets/style/reset.scss'
 import './assets/style/var.scss'
 
+import { NavBar } from 'vant';
+Vue.use(NavBar);
 Vue.config.productionTip = false
 
 new Vue({
