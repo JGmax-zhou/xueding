@@ -1,5 +1,5 @@
 <template>
     <div>
-        <router-view></router-view>
+        登录页
     </div>
 </template>

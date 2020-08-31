@@ -1,5 +1,5 @@
 <template>
     <div>
-        <router-view></router-view>
+         404 not fonud... 
     </div>
 </template>

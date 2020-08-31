@@ -1,27 +1,61 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-  const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+const routes = [{
+        path: '/',
+        redirect: '/index'
+    },
+    {
+        path: "/login",
+        component: () =>
+            import ('../views/Login.vue')
+    },
+    {
+        path: '/home',
+        component: () =>
+            import ('../views/Home.vue'),
+        children: [{
+                path: '',
+                redirect: '/index'
+            },
+            {
+                path: '/index',
+                component: () =>
+                    import ('../views/Index.vue'),
+            },
+            {
+                path: '/Classroom',
+                component: () =>
+                    import ('../views/Classroom.vue'),
+            },
+            {
+                path: '/find',
+                component: () =>
+                    import ('../views/Find.vue'),
+                meta: { requiresAuth: true }
+            },
+            {
+                path: '/mine',
+                component: () =>
+                    import ('../views/Mine.vue'),
+            },
+            {
+                path: '/delail',
+                component: () =>
+                    import ('../views/Delail.vue'),
+            }
+        ]
+    },
+    {
+        path: '*',
+        component: () =>
+            import ('../views/Nofound404.vue'),
+    }
+];
 
 const router = new VueRouter({
-  routes
-})
-
-export default router
+    routes
+});
+export default router;
