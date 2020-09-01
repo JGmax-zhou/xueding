@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 
 const routes = [{
         path: '/',
-        redirect: '/index'
+        redirect: '/Mine'
     },
     {
         path: "/login",
@@ -53,6 +53,38 @@ const routes = [{
             }
         ]
     },
+    {
+        path: '/Colect',
+        component: () =>
+            import ('../views/MineColect.vue'),
+    },
+    {
+        path: '/setup',
+        component: () =>
+            import ('../views/MineSetup.vue'),
+    },
+
+    {
+        path: '/modifieddata',
+        component: () =>
+            import ('../views/ModifiedData.vue'),
+    },
+    {
+        path: '/personinformation',
+        component: () =>
+            import ('../views/PersonInformation.vue'),
+    },
+    {
+        path: '/livelesson',
+        component: () =>
+            import ('../views/LiveLesson.vue'),
+    },
+    {
+        path: '/myLesson',
+        component: () =>
+            import ('../views/MineLesson.vue'),
+    },
+
     {
         path: '*',
         component: () =>
