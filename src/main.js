@@ -27,6 +27,8 @@ Vue.use(SwipeItem);
 Vue.use(Sidebar);
 Vue.use(SidebarItem);
 
+import { NavBar } from 'vant';
+Vue.use(NavBar);
 Vue.config.productionTip = false
 
 new Vue({
