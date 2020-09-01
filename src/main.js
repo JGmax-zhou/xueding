@@ -7,8 +7,14 @@ import "amfe-flexible";
 import './assets/style/reset.scss'
 import './assets/style/var.scss'
 
-import { NavBar } from 'vant';
+import { NavBar, Swipe, SwipeItem,Field,Button, } from 'vant';
+
 Vue.use(NavBar);
+Vue.use(Swipe);
+Vue.use(SwipeItem);
+Vue.use(Field);
+Vue.use(Button);
+
 Vue.config.productionTip = false
 
 new Vue({

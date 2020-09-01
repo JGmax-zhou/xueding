@@ -5,17 +5,31 @@ Vue.use(VueRouter);
 
 const routes = [{
         path: '/',
-        redirect: '/index'
+        redirect: '/viewpager'
+    },
+    {
+        path: '/viewpager',
+        component: () => import('../views/Viewpager.vue')
+
+    },
+    {
+        path: '/register',
+        component:() => import('../views/Register.vue')
+    },
+    {
+        path: '/PasswordToIogin',
+        component: () => import('../views/PasswordToIogin.vue')
+
     },
     {
         path: "/login",
         component: () =>
-            import ('../views/Login.vue')
+            import('../views/Login.vue')
     },
     {
         path: '/home',
         component: () =>
-            import ('../views/Home.vue'),
+            import('../views/Home.vue'),
         children: [{
                 path: '',
                 redirect: '/index'
@@ -23,35 +37,37 @@ const routes = [{
             {
                 path: '/index',
                 component: () =>
-                    import ('../views/Index.vue'),
+                    import('../views/Index.vue'),
             },
             {
                 path: '/Classroom',
                 component: () =>
-                    import ('../views/Classroom.vue'),
+                    import('../views/Classroom.vue'),
             },
             {
                 path: '/find',
                 component: () =>
-                    import ('../views/Find.vue'),
-                meta: { requiresAuth: true }
+                    import('../views/Find.vue'),
+                meta: {
+                    requiresAuth: true
+                }
             },
             {
                 path: '/mine',
                 component: () =>
-                    import ('../views/Mine.vue'),
+                    import('../views/Mine.vue'),
             },
             {
                 path: '/delail',
                 component: () =>
-                    import ('../views/Delail.vue'),
+                    import('../views/Delail.vue'),
             }
         ]
     },
     {
         path: '*',
         component: () =>
-            import ('../views/Nofound404.vue'),
+            import('../views/Nofound404.vue'),
     }
 ];
 
