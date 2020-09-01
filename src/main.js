@@ -6,7 +6,7 @@ import store from './store'
 import "amfe-flexible";
 import './assets/style/reset.scss'
 import './assets/style/var.scss'
-
+import './assets/font/iconfont.css'
 
 import { Rate } from 'vant';
 Vue.use(Rate)
