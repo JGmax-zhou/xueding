@@ -5,7 +5,23 @@ Vue.use(VueRouter);
 
 const routes = [{
         path: '/',
-        redirect: '/Mine'
+        redirect: '/viewpager'
+    },
+    {
+        path: '/viewpager',
+        component: () =>
+            import ('../views/Viewpager.vue')
+
+    },
+    {
+        path: '/register',
+        component: () =>
+            import ('../views/Register.vue')
+    },
+    {
+        path: '/PasswordToIogin',
+        component: () =>
+            import ('../views/PasswordToIogin.vue')
     },
     {
         path: "/login",
@@ -34,7 +50,9 @@ const routes = [{
                 path: '/find',
                 component: () =>
                     import ('../views/Find.vue'),
-                meta: { requiresAuth: true }
+                meta: {
+                    requiresAuth: true
+                }
             },
             {
                 path: '/mine',

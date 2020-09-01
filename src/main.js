@@ -2,16 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-
-import { NavBar, Toast } from 'vant';
-
-Vue.use(NavBar);
-Vue.use(Toast);
 import "amfe-flexible"
 import './assets/style/reset.scss'
 import './assets/style/var.scss'
 
-// 依赖组件
 import {
     Tabbar,
     TabbarItem,
@@ -22,7 +16,10 @@ import {
     Sidebar,
     SidebarItem,
     Tab,
-    Tabs
+    Tabs,
+    Field,
+    Button,
+    Toast
 } from 'vant';
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
@@ -34,8 +31,11 @@ Vue.use(Sidebar);
 Vue.use(SidebarItem);
 Vue.use(Tab);
 Vue.use(Tabs);
-Vue.config.productionTip = false
+Vue.use(Field);
+Vue.use(Button);
+Vue.use(Toast);
 
+Vue.config.productionTip = false
 new Vue({
     router,
     store,
