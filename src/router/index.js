@@ -45,6 +45,41 @@ const routes = [{
                 path: '/delail',
                 component: () =>
                     import ('../views/Delail.vue'),
+            },
+            {
+                path: '/car',
+                component: () =>
+                    import ('../views/Car.vue'),
+            },
+            {
+                path: '/address',
+                component: () =>
+                    import ('../views/Address.vue'),
+            },
+            {
+                path: '/addaddress',
+                component: () =>
+                    import ('../views/AddAddress.vue'),
+            },
+            {
+                path: '/editaddress/:id',
+                component: () =>
+                    import ('../views/EditAddress.vue'),
+            },
+            {
+                path: '/order',
+                component: () =>
+                    import ('../views/Order.vue'),
+            },
+            {
+                path: '/ordersuccess',
+                component: () =>
+                    import ('../views/OrderSuccess.vue'),
+            },
+            {
+                path: '/orderpay',
+                component: () =>
+                    import ('../views/OrderPay.vue'),
             }
         ]
     },
