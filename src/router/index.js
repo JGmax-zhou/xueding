@@ -45,6 +45,11 @@ const routes = [{
                 path: '/delail',
                 component: () =>
                     import ('../views/Delail.vue'),
+            },
+            {
+                path: '/Ordersuccess',
+                component: () =>
+                    import ('../views/OrderSuccess.vue.vue')
             }
         ]
     },

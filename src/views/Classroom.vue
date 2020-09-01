@@ -4,44 +4,115 @@
     <van-nav-bar title="课堂" fixed placeholder id="classroom" />
     <!-- 轮播图 -->
     <van-swipe :loop="false" :width="320">
-      <van-swipe-item>
-        <img src="../assets/images/img_24.png" alt />
+      <!-- <van-swipe-item>
+        <img src="https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_02.png" alt />
       </van-swipe-item>
       <van-swipe-item>
-        <img src="../assets/images/img_25.png" alt />
+        <img src="http://localhost:8080/img/img_25.9fa50913.png" alt />
+      </van-swipe-item> -->
+      <van-swipe-item v-for="item in datalist" :key="item">
+        <img :src="item" alt />
       </van-swipe-item>
     </van-swipe>
 
     <!-- 直播课内容 -->
     <main>
-      <article>
-        <van-sidebar v-model="activeKey">
-          <van-sidebar-item title="免费直播课" />
-          <div class="more">更多&nbsp;></div>
-        </van-sidebar>
-      </article>
-      <ul class="info">
-        <li>
-          <img src="../assets/images/img_13.png" alt />
-          <h4>语文-作文题目分析</h4>
-          <p>10月12日 9:00-10:00</p>
-        </li>
-        <li>
-          <img src="../assets/images/img_13.png" alt />
-          <h4>语文-作文题目分析</h4>
-          <p>10月12日 9:00-10:00</p>
-        </li>
-        <li>
-          <img src="../assets/images/img_13.png" alt />
-          <h4>语文-作文题目分析</h4>
-          <p>10月12日 9:00-10:00</p>
-        </li>
-        <li>
-          <img src="../assets/images/img_13.png" alt />
-          <h4>语文-作文题目分析</h4>
-          <p>10月12日 9:00-10:00</p>
-        </li>
-      </ul>
+      <!-- 免费直播课 -->
+      <div class="Livefree">
+        <article>
+          <van-sidebar v-model="activeKey">
+            <van-sidebar-item title="免费直播课" />
+            <div class="more">更多&nbsp;></div>
+          </van-sidebar>
+        </article>
+        <ul class="info">
+          <li>
+            <img src="../assets/images/img_13.png" alt />
+            <h4>语文-作文题目分析</h4>
+            <p>10月12日 9:00-10:00</p>
+          </li>
+          <li>
+            <img src="../assets/images/img_13.png" alt />
+            <h4>语文-作文题目分析</h4>
+            <p>10月12日 9:00-10:00</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 即将开始 -->
+      <div class="Livefree">
+        <article>
+          <van-sidebar v-model="activeKey">
+            <van-sidebar-item title="即将开始" />
+            <div class="more">更多&nbsp;></div>
+          </van-sidebar>
+        </article>
+        <van-tabs v-model="active">
+          <van-tab title="学科"></van-tab>
+          <van-tab title="年级"></van-tab>
+          <van-tab title="上课形式"></van-tab>
+        </van-tabs>
+        <ul class="info">
+          <li>
+            <img src="../assets/images/img_13.png" alt />
+            <h4>语文-作文题目分析</h4>
+            <p>10月12日 9:00-10:00</p>
+          </li>
+          <li>
+            <img src="../assets/images/img_13.png" alt />
+            <h4>语文-作文题目分析</h4>
+            <p>10月12日 9:00-10:00</p>
+          </li>
+                    <li>
+            <img src="../assets/images/img_13.png" alt />
+            <h4>语文-作文题目分析</h4>
+            <p>10月12日 9:00-10:00</p>
+          </li>
+          <li>
+            <img src="../assets/images/img_13.png" alt />
+            <h4>语文-作文题目分析</h4>
+            <p>10月12日 9:00-10:00</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 精彩回放-->
+      <div class="Livefree">
+        <article>
+          <van-sidebar v-model="activeKey">
+            <van-sidebar-item title="即将开始" />
+            <div class="more">更多&nbsp;></div>
+          </van-sidebar>
+        </article>
+        <van-tabs v-model="active">
+          <van-tab title="学科"></van-tab>
+          <van-tab title="年级"></van-tab>
+          <van-tab title="上课形式"></van-tab>
+        </van-tabs>
+        <ul class="info">
+          <li>
+            <img src="../assets/images/img_13.png" alt />
+            <h4>语文-作文题目分析</h4>
+            <p>10月12日 9:00-10:00</p>
+          </li>
+          <li>
+            <img src="../assets/images/img_13.png" alt />
+            <h4>语文-作文题目分析</h4>
+            <p>10月12日 9:00-10:00</p>
+          </li>
+                    <li>
+            <img src="../assets/images/img_13.png" alt />
+            <h4>语文-作文题目分析</h4>
+            <p>10月12日 9:00-10:00</p>
+          </li>
+          <li>
+            <img src="../assets/images/img_13.png" alt />
+            <h4>语文-作文题目分析</h4>
+            <p>10月12日 9:00-10:00</p>
+          </li>
+        </ul>
+      </div>
+
     </main>
   </div>
 </template>
@@ -50,6 +121,10 @@ export default {
   data() {
     return {
       activeKey: 0,
+      datalist:[
+        'https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_02.png',
+        'http://localhost:8080/img/img_25.9fa50913.png'
+      ]
     };
   },
 };
@@ -59,7 +134,7 @@ export default {
 <style lang="scss">
 // 标题部分
 #classroom {
-  background: #f5f5f5;
+  background: #fff;
   font-size: 17px;
   color: #333333;
   height: 46px;
@@ -83,13 +158,14 @@ export default {
 // 直播课内容
 main {
   padding: 0px 13px;
+  margin-bottom: 50px;
 
   // 直播课内容(标题)
   .van-sidebar {
     width: 100%;
     position: relative;
     .van-sidebar-item {
-      background: #f5f5f5;
+      background: #fff;
       font-size: 17px;
       font-weight: bold;
       color: #333333;
@@ -117,6 +193,19 @@ main {
       margin-bottom: 10px;
     }
   }
+
+  // tab切换
+  .van-tabs__wrap{
+    margin-top: -20px;
+margin-bottom: 10px;
+
+  }
+.van-tabs__nav{
+  background: transparent;
+}
+.van-tabs__line{
+  background: #4966F5;
+}
 }
 
 .van-sidebar-item--select::before {
@@ -124,4 +213,6 @@ main {
   height: 24px;
   background: #4966f5;
 }
+
+
 </style>

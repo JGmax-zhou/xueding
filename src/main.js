@@ -16,7 +16,9 @@ import {
     Swipe,
     SwipeItem,
     Sidebar,
-    SidebarItem
+    SidebarItem,
+    Tab,
+    Tabs
 } from 'vant';
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
@@ -26,9 +28,8 @@ Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(Sidebar);
 Vue.use(SidebarItem);
-
-import { NavBar } from 'vant';
-Vue.use(NavBar);
+Vue.use(Tab);
+Vue.use(Tabs);
 Vue.config.productionTip = false
 
 new Vue({
