@@ -10,24 +10,26 @@
         </section>
         <!-- 支付方式 -->
         <van-cell-group>
+            <van-radio-group v-model="radio">
             <van-cell>
                 <span><van-image width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" />
                 <i>微信支付</i>
                 </span>
-                <van-radio name="1"></van-radio>
+                <van-radio name="0"></van-radio>
             </van-cell>
             <van-cell>
                 <span><van-image width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" />
                 <i>支付宝支付</i>
                 </span>
-                <van-radio name="2"></van-radio>
+                <van-radio name="1"></van-radio>
             </van-cell>
             <van-cell>
                 <span><van-image width="20" height="20" src="https://img.yzcdn.cn/vant/cat.jpeg" />
                 <i>银行卡支付</i>
                 </span>
-                <van-radio name="3"></van-radio>
+                <van-radio name="2"></van-radio>
             </van-cell>
+            </van-radio-group>
         </van-cell-group>
         <van-button round type="info" @click="pay">确认支付</van-button>
     </div>
@@ -36,7 +38,9 @@
 <script>
 export default {
     data() {
-        return {};
+        return {
+            radio:0
+        };
     },
 
     components: {},

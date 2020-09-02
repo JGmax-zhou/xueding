@@ -1,5 +1,5 @@
 <template>
-    <div class="address-container">
+    <div class="editaddress-container">
         <!-- 标题 -->
         <van-nav-bar title="修改收货地址" fixed placeholder z-index="10" left-arrow @click-left="onClickLeft" />
         <van-address-edit
