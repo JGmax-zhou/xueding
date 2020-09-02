@@ -1,10 +1,6 @@
 <template>
   <div id="coursegoods">
           <!-- 推荐课程页面 -->
-    <!-- 标题部分 -->
-    <van-sidebar v-model="activeKey">
-      <van-sidebar-item title="推荐课程" />
-    </van-sidebar>
     <!-- 课程内容 -->
     <ul class="courseList">
       <li class="courseItem">
@@ -151,7 +147,7 @@ export default {
           color: white;
           background: linear-gradient(#0798FF,#4966F5);
           position: absolute;
-          right: 0;
+          right: 15px;
           bottom: 16px;
       }
     }
