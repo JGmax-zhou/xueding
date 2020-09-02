@@ -1,0 +1,219 @@
+$width:375px;
+$color: #666666;
+                  // 轮播图
+.delail_i {
+  width: $width;
+  height: 165px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+                 //  线下内容
+.delail_ATL {
+  width: $width;
+  height: 310px;
+  background: #F8F8F8;
+  border: .5px solid #cccccc;
+  padding: 15px 30px 14px 20px;
+  // background: red;
+  .delail_span1{
+    width: 24px;
+    height: 16.5px;
+    background:green;
+    font-size: 12px;
+    color: #ffffff;
+    margin-right: 3px;
+  }
+  .delail_span2{
+    font-size: 17px;
+    color: #333333;
+    
+  }
+  .delail_p1{
+    font-size: 13px;
+    color: $color;
+    margin-top: 4px;
+  }
+  .delail_evaluate{
+    font-size: 13px;
+    color:$color ;
+    margin-right:4px;
+  }
+   .van-rate__icon{
+     font-size: 0.3rem;
+     color:#4966F5;
+   }
+          //  线下内容里的小时钟
+  .delail_time_one{
+    margin-top:7px; 
+
+    .icon-shijian00{
+    font-size: 16px;
+    color: #979797;
+    }
+    .delail_time{
+    font-size: 13px;
+    color:$color;
+    margin-left: 4px;
+
+  }
+  }
+ 
+    // 价格
+    .delail_price{
+      margin-top: 14px;
+      .delail_price_one{
+        color: #FA6400;
+        font-size:17px ;
+      }
+      .delail_price_tow{
+        text-decoration:line-through;
+        font-size: 13px;
+        color: #888888;
+        margin-left: 9px;
+      }
+      .delail_price_p{
+       font-size: 11px;
+       color: $color;
+       margin-top: 5px;
+      }
+    }
+
+    // 限时购
+    .delail_limit{
+
+      margin-top:30px;
+         .delail_limit_span{
+          width: 40.5px;
+           height: 15.5px;
+          border: .2px solid #FA6400;
+          font-size: 11px;
+          color: #FA6400;
+          border-radius: 50px 0 100px 0;
+         }
+         .delail_limit_span_one{
+           font-size: 12px;
+           color: $color;
+           margin-left: 12px;
+         }
+    }
+
+    // 服务
+     .delail_serve{
+
+      margin-top: 25px;
+         .delail_serve_o{
+           font-size: 12px;
+           color:#333333 ;
+         }
+         .delail_serve_t{
+           font-size: 12px;
+           color: $color;
+           margin-left: 14px;
+           margin-top: 25px;  
+         }
+     }
+}
+
+// 授课老师
+.delail_give{
+  width: $width;
+  height:172px ;
+  border: .5px solid #cccccc;
+  margin-top: 10px;
+  padding: 16px 0 16px 20px;
+
+  .delail_give_h6{
+    font-size: 17px;
+    color: #333333;
+  }
+  .delail_give_div{
+    width: 60px;
+    height: 90px;
+    float: left;
+    margin: 30px  47px  9px 0;
+    text-align: center;
+    span{
+      font-size: 14px;
+      color:$color ;
+      
+    
+    }
+  }
+}
+
+// 课程大纲
+.delail_outline{
+  width: $width;
+  height: 367.5px;
+  border: .5px solid #cccccc;
+  margin-top: 10px;
+  position: relative;
+ 
+  .delail_outline_h6{
+    font-size: 17px;
+    color: #333333;
+    display: inline;
+    margin-top: 68px;
+    margin-left:20px ;
+    
+  } 
+  .delail_outline_span{
+    font-size: 13px;
+    color:$color ;
+    margin-left: 5px;
+    position: absolute;
+    top: 29px;
+    margin-top: 68px;
+    margin-left:20px ;
+  }
+  // 适合对象，培养目标
+  .delail_outline_matter{
+
+    .delail_outline_d1{
+      display: flex;
+      justify-content: space-between;
+      margin-top: 26px ;
+
+      .delail_outline_s1{
+        width: 60px;
+        
+
+        font-size: 13px;
+        margin-left: 18px;
+
+      }
+      .delail_outline_s2{
+        width: 247px;
+        font-size: 13px;
+        margin-left: 9px;
+      }
+    }
+      .delail_outline_d2{
+      display: flex;
+      justify-content: space-between;
+      margin-top: 24px ;
+        .delail_outline_s1{
+          width: 60px;
+          font-size: 13px;
+          margin-left: 18px;
+  
+        }
+        .delail_outline_s2{
+          width: 247px;
+          font-size: 13px;
+          margin-left: 9px;
+          padding-bottom: 24px;
+        }
+      }
+       
+  }
+  
+}
+
+.xqyuImg{
+  width: 375px;
+  height: 100%;
+}

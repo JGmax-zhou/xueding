@@ -69,6 +69,7 @@ export default {
         font-size: 12px;
         color: #666;
         margin-left: 16px;
+        margin-top:5px
       }
     }
     .picture{
