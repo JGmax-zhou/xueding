@@ -12,20 +12,23 @@
 </template>
 
 <script>
+import img32 from '../assets/images/img_32.png'//引导图第一张
+import img33 from '../assets/images/img_33.png'//引导图第二张
+import img34 from '../assets/images/img_34.png'//引导图第三张
 export default {
   data() {
     return {
       imgArr: [
         {
-          img: "http://localhost:8080/img/img_32.0b272276.png",
+          img: img32,
           id: "1",
         },
         {
-          img: "http://localhost:8080/img/img_33.888e0061.png",
+          img: img33,
           id: "2",
         },
         {
-          img: "http://localhost:8080/img/img_34.03e5277d.png",
+          img: img34,
           id: "3",
         },
       ],
