@@ -5,8 +5,8 @@ Vue.use(VueRouter);
 
 const routes = [{
         path: '/',
-        // redirect: '/viewpager'
-        redirect: '/home'
+        redirect: '/viewpager'
+            // redirect: '/home'
     },
     {
         path: '/viewpager',
@@ -81,9 +81,39 @@ const routes = [{
                     import ('../views/Delail.vue'),
             },
             {
-                path: '/Ordersuccess',
+                path: '/car',
                 component: () =>
-                    import ('../views/OrderSuccess.vue.vue')
+                    import ('../views/Car.vue'),
+            },
+            {
+                path: '/address',
+                component: () =>
+                    import ('../views/Address.vue'),
+            },
+            {
+                path: '/addaddress',
+                component: () =>
+                    import ('../views/AddAddress.vue'),
+            },
+            {
+                path: '/editaddress/:id',
+                component: () =>
+                    import ('../views/EditAddress.vue'),
+            },
+            {
+                path: '/order',
+                component: () =>
+                    import ('../views/Order.vue'),
+            },
+            {
+                path: '/ordersuccess',
+                component: () =>
+                    import ('../views/OrderSuccess.vue'),
+            },
+            {
+                path: '/orderpay',
+                component: () =>
+                    import ('../views/OrderPay.vue'),
             }
         ]
     },
