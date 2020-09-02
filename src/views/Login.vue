@@ -8,7 +8,7 @@
 
     <section>
       <van-cell-group>
-        <van-field v-model="value" label="+86" placeholder="请输入手机号" />
+         <van-field v-model="value" label="+86" placeholder="请输入手机号" />
       </van-cell-group>
     </section>
 
@@ -90,6 +90,9 @@ export default {
     height: 41px;
     color: 15px;
     background: #f8f8f8;
+  }
+  .van-cell-group{
+    background: none;
   }
   span {
     font-size: 12px;
