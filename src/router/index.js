@@ -5,7 +5,8 @@ Vue.use(VueRouter);
 
 const routes = [{
         path: '/',
-        redirect: '/viewpager'
+        // redirect: '/viewpager'
+        redirect: '/home'
     },
     {
         path: '/viewpager',
@@ -41,14 +42,20 @@ const routes = [{
                 component: () =>
                     import ('../views/Index.vue'),
                 children: [{
-                    path: 'index-choiceness/:id', //首页精选页面
-                    component: () =>
-                        import ("../views/index-choiceness.vue")
-                }, {
-                    path: 'index-nav/:id', //首页导航栏除精选外的其他页面
-                    component: () =>
-                        import ("../views/index-nav.vue")
-                }, ]
+                        path: '',
+                        redirect: 'index-choiceness/:'
+                    },
+                    {
+                        path: 'index-choiceness/:id', //首页精选页面
+                        component: () =>
+                            import ("../views/index-choiceness.vue")
+                    },
+                    {
+                        path: 'index-nav/:id', //首页导航栏除精选外的其他页面
+                        component: () =>
+                            import ("../views/index-nav.vue")
+                    },
+                ]
             },
             {
                 path: '/Classroom',

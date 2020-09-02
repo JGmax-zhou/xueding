@@ -13,7 +13,7 @@
 <script>
 import indexHeader from "../components/index/index-header"; //首页头部组件
 import "../assets/style/index.css"; //首页组件css修改文件
-import { getIndex } from "../utils/api";
+// import { getIndex } from "../utils/api";
 
 export default {
   data() {

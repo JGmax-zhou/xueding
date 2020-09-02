@@ -123,7 +123,7 @@ export default {
       activeKey: 0,
       datalist:[
         'https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_02.png',
-        'http://localhost:8080/img/img_25.9fa50913.png'
+        'https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_02.png'
       ]
     };
   },
