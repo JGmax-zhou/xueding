@@ -1,0 +1,50 @@
+.van-search {
+    height: 26px;
+    width: 246px;
+}
+
+
+/* 搜索框 */
+
+.van-field__body>input {
+    background: #ddd;
+    /* color: #000; */
+}
+
+.van-search__content {
+    background: #ddd;
+    border-radius: 3px;
+}
+
+
+/* ----------------------------- */
+
+
+/* tab导航栏 */
+
+.van-tabs--line {
+    width: 100%;
+}
+
+.van-tabs .van-tab {
+    padding: 0px 10px 0px 10px;
+}
+
+.van-tab__text {
+    font-size: 15px;
+}
+
+
+/* ------------------------------------ */
+
+
+/* 导航金刚区、名师人气榜 */
+
+.van-grid {
+    width: 100%;
+    background: #f5f5f5;
+}
+
+.van-grid-item__content--center {
+    background: #f5f5f5;
+}
