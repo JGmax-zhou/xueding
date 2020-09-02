@@ -137,6 +137,7 @@ export default {
   flex-direction: column;
   align-items: center;
   // background: red;
+  margin-bottom: 50px;
   .banner {
     width: 355px;
     height: 139px;

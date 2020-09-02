@@ -42,9 +42,10 @@
 
 .van-grid {
     width: 100%;
-    background: #f5f5f5;
+    /* background: #f5f5f5; */
 }
 
-.van-grid-item__content--center {
+
+/* .van-grid-item__content--center {
     background: #f5f5f5;
-}
+} */

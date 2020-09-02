@@ -51,7 +51,7 @@
         <span class="originalPrice">￥1500</span>
         <span class="currPrice">￥1999</span>
 
-        <div class="button">加入选课单</div class="button">
+        <div class="button">加入选课单</div >
       </li>
     </ul>
   </div>

@@ -3,7 +3,7 @@
       <div class="grade">高一</div>
       <van-search  
         placeholder="搜索课程"
-        background="#f5f5f5" />
+        />
       <img src="../../assets/icon/icon_21.png" alt="">
     </header>
 </template>

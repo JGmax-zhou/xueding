@@ -3,7 +3,7 @@
     <!-- 首页头部搜索栏 -->
     <indexHeader />
     <!-- tab导航栏 -->
-    <van-tabs v-model="active" background="#f5f5f5" color="#4966F5" @click="dowNav">
+    <van-tabs v-model="active" color="#4966F5" @click="dowNav">
       <van-tab v-for="(value,index) in tab" :key="index" :title="value" ></van-tab>
     </van-tabs>
     <router-view></router-view>

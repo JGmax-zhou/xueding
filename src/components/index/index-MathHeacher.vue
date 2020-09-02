@@ -28,21 +28,24 @@ export default {};
     text-indent: 20px;
   }
   .recommendTeacher {
-    width: 100%;
-    height: 181px;
+    width: 346px;
+    height: 150px;
     background: url(../../assets/images/img_03.png) no-repeat center;
     display: flex;
     flex-direction: column;
     position: relative;
+    box-shadow: 5px 5px 10px 1px #ddd;
+    border-radius: 10px;
+    margin-top:10px;
     h3 {
       font-size: 14px;
-      margin-top: 40px;
+      margin-top: 20px;
       margin-left: 40px;
     }
     .goldMedal {
       position: absolute;
       left: 100px;
-      top: 40px;
+      top: 20px;
     }
     p {
       margin-top: 5px;
@@ -60,7 +63,7 @@ export default {};
     .interactionBut {
       position: absolute;
       left: 40px;
-      bottom: 35px;
+      bottom: 15px;
     }
   }
   
