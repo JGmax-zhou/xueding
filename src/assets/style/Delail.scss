@@ -49,7 +49,7 @@ $b-color:#F8F8F8;
    }
           //  线下内容里的小时钟
   .delail_time_one{
-    margin-top:7px; 
+   
 
     .icon-shijian00{
     font-size: 16px;
@@ -65,7 +65,7 @@ $b-color:#F8F8F8;
  
     // 价格
     .delail_price{
-      margin-top: 1px;
+      margin-top: -5px;
       .delail_price_one{
         color: #FA6400;
         font-size:17px ;
@@ -85,14 +85,20 @@ $b-color:#F8F8F8;
 
     // 限时购
     .delail_limit{
-
-      margin-top:-22px;
+       display: flex;
+      margin-top:30px;
          .delail_limit_span{
           width: 40.5px;
            height: 15.5px;
+           display: block;
           font-size: 11px;
           color: #FA6400;
-          border-radius: 50px 0 100px 0;
+          border: 1px solid #FA6400 ;
+          border-radius: 10px  0 10px 0;
+          display: flex;
+        justify-content: center;
+         align-items: center;
+
          }
          .delail_limit_span_one{
            font-size: 12px;
@@ -273,7 +279,6 @@ $b-color:#F8F8F8;
    .delail_button_one{
      width: 82px;
      height: 100%;
-     background: pink;
      display: flex;
      justify-content: center;
      flex-direction: column;
