@@ -5,6 +5,7 @@ import store from './store'
 import "amfe-flexible"
 import './assets/style/reset.scss'
 import './assets/style/var.scss'
+import './assets/font/iconfont.css'
 import {
     Tabbar,
     TabbarItem,
@@ -23,7 +24,7 @@ import {
     Grid, //宫格、金刚区
     GridItem, //宫格、金刚区
     Image, //图片
-    // Card, //商品卡片
+    Rate,
 } from 'vant';
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
@@ -42,7 +43,7 @@ Vue.use(Search);
 Vue.use(Grid);
 Vue.use(GridItem);
 Vue.use(Image);
-// Vue.use(Card);
+Vue.use(Rate)
 
 Vue.config.productionTip = false
 new Vue({
