@@ -70,9 +70,34 @@
           <p class="delail_outline_s2">巩固基础, 扩展升级</p>
         </div>
         <hr />
+        <!-- 第一讲  诗歌 -->
+        <div class="delail_poetry_one">
+          <span class="delail_poetry_one_s1">第01讲</span>
+          <b class="delail_poetry_one_s2">诗歌：常见意向梳理</b>
+          <p class="delail_poetry_one_p">9月4日 周五19:00-21:00</p>
+        </div>
+        <div class="delail_poetry_tow">
+          <span class="delail_poetry_one_s1">第02讲</span>
+          <b class="delail_poetry_one_s2">诗歌：鉴赏常考题材之咏物传志</b>
+          <p class="delail_poetry_one_p">9月11日 周五19:00-21:00</p>
+        </div>
+        <div class="delail_poetry_one">
+          <span class="delail_poetry_one_s1">第03讲</span>
+          <b class="delail_poetry_one_s2">诗歌：常见意向梳理</b>
+          <p class="delail_poetry_one_p">9月18日 周五19:00-21:00</p>
+        </div>
       </div>
     </div>
     <img class="xqyuImg" src="../assets/images/xiangqingye.png.png" alt />
+
+    <!-- 加入选课按钮 -->
+    <div class="delail_button">
+      <div class="delail_button_one">
+        <span class="iconfont icon-qicheqianlian-"></span>
+        <p class="delail_button_one_p">选课单</p>
+      </div>
+      <div class="delail_button_tow">加入选课</div>
+    </div>
   </div>
 </template>
 
@@ -93,4 +118,5 @@ export default {
 
 <style lang="scss" >
 @import "../assets/style/Delail.scss";
+@import "../assets/style/reset.scss";
 </style>
