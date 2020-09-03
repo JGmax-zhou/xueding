@@ -3,18 +3,8 @@
     <!-- 标题部分 -->
     <van-nav-bar title="课堂" fixed placeholder id="classroom" />
     <!-- 轮播图 -->
-    <van-swipe :loop="false" :width="320">
-      <!-- <van-swipe-item>
-        <img src="https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_02.png" alt />
-      </van-swipe-item>
-      <van-swipe-item>
-        <img src="http://localhost:8080/img/img_25.9fa50913.png" alt />
-      </van-swipe-item> -->
-      <van-swipe-item v-for="item in datalist" :key="item">
-        <img :src="item" alt />
-      </van-swipe-item>
-    </van-swipe>
 
+    <banner />
     <!-- 直播课内容 -->
     <main>
       <!-- 免费直播课 -->
@@ -63,7 +53,7 @@
             <h4>语文-作文题目分析</h4>
             <p>10月12日 9:00-10:00</p>
           </li>
-                    <li>
+          <li>
             <img src="../assets/images/img_13.png" alt />
             <h4>语文-作文题目分析</h4>
             <p>10月12日 9:00-10:00</p>
@@ -100,7 +90,7 @@
             <h4>语文-作文题目分析</h4>
             <p>10月12日 9:00-10:00</p>
           </li>
-                    <li>
+          <li>
             <img src="../assets/images/img_13.png" alt />
             <h4>语文-作文题目分析</h4>
             <p>10月12日 9:00-10:00</p>
@@ -112,22 +102,21 @@
           </li>
         </ul>
       </div>
-
     </main>
   </div>
 </template>
 <script>
+import banner from "../components/3Dbanner";
 export default {
   data() {
     return {
       activeKey: 0,
-      active:0,
-      datalist:[
-        'https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_02.png',
-        'https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_02.png'
-      ]
+      active: 0,
     };
   },
+  components: {
+    banner
+    },
 };
 </script>
 
@@ -196,17 +185,16 @@ main {
   }
 
   // tab切换
-  .van-tabs__wrap{
+  .van-tabs__wrap {
     margin-top: -20px;
-margin-bottom: 10px;
-
+    margin-bottom: 10px;
   }
-.van-tabs__nav{
-  background: transparent;
-}
-.van-tabs__line{
-  background: #4966F5;
-}
+  .van-tabs__nav {
+    background: transparent;
+  }
+  .van-tabs__line {
+    background: #4966f5;
+  }
 }
 
 .van-sidebar-item--select::before {
@@ -214,6 +202,4 @@ margin-bottom: 10px;
   height: 24px;
   background: #4966f5;
 }
-
-
 </style>
