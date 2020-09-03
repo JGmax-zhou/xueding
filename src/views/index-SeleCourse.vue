@@ -1,7 +1,7 @@
 <template>
   <div class="seleCourse">
     <!-- 首页头部搜索栏 -->
-    <indexHeader class="headerSeek" />
+    <indexHeader class="headerSeek" :hasback="true" :menu="false"/>
     <!-- 校区、学科、上课形式 -->
     <indexRegion />
   </div>

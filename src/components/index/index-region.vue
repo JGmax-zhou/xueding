@@ -17,7 +17,7 @@
     <div
       class="XLcontent"
       v-for="(item,indexr) in navlist"
-      :key="indexr"
+      :key="indexr + 1000"
       v-show="navlistnum==indexr && navlistnum!=2"
     >
       <van-sidebar v-model="activeKey">

@@ -123,6 +123,11 @@ const routes = [{
             import ("../views/index-SeleCourse.vue")
     },
     {
+        path: '/seek', //搜索页
+        component: () =>
+            import ("../components/public/seek.vue")
+    },
+    {
         path: '/Colect',
         component: () =>
             import ('../views/MineColect.vue'),

@@ -1,17 +1,23 @@
 <template>
     <header class="headerWrap">
       <div class="grade">高一</div>
+      <!-- 搜索框 -->
       <van-search  
+        @click="seekDow"
         placeholder="搜索课程"
         />
-      <img src="../../assets/icon/icon_21.png" alt="">
-      <div class="back" @click="indexback">&lt;</div>
+        <!-- 菜单 -->
+      <img v-if="menu" src="../../assets/icon/icon_21.png" alt="">
+
+      <!-- 后退箭头 -->
+      <div class="back" v-if="hasback" @click="indexback">&lt;</div> 
     </header>
 </template>
 
 <script>
 
 export default {
+  props:{hasback:Boolean,menu:Boolean},
   data() {
     return {};
   },
@@ -25,8 +31,12 @@ export default {
   },
 
   methods: {
-   indexback(){
+   indexback(){//返回上一页
      this.$router.go(-1)
+   },
+   seekDow(){//搜索框路由搜索页
+     this.$router.push("/seek")
+     console.log(1);
    }
   }
 };

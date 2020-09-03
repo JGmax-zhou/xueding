@@ -1,7 +1,7 @@
 <template>
   <div class="indexContainer">
     <!-- 首页头部搜索栏 -->
-    <indexHeader />
+    <indexHeader :hasback="false" :menu="true"/>
     <!-- tab导航栏 -->
     <van-tabs v-model="active" color="#4966F5" @change="dowNav" swipeable animated  >
       <van-tab v-for="(value,index) in tab" :key="index" :title="value" >
@@ -22,7 +22,8 @@ export default {
     return {
       active:0,
       tab: ["精选", "数学", "语文", "英语", "化学", "物理", "生物"],
-      indexs:0
+      indexs:0,
+      // backtrack:false
     };
   },
 
