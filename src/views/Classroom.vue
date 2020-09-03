@@ -121,6 +121,7 @@ export default {
   data() {
     return {
       activeKey: 0,
+      active:0,
       datalist:[
         'https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_02.png',
         'https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_02.png'

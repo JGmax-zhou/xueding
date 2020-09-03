@@ -11,6 +11,13 @@
       "font_class": "shijian00",
       "unicode": "e6ce",
       "unicode_decimal": 59086
+    },
+    {
+      "icon_id": "2038793",
+      "name": "购物车-23",
+      "font_class": "qicheqianlian-",
+      "unicode": "e618",
+      "unicode_decimal": 58904
     }
   ]
 }

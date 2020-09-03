@@ -1,10 +1,6 @@
 <template>
   <div id="coursegoods">
           <!-- 推荐课程页面 -->
-    <!-- 标题部分 -->
-    <!-- <van-sidebar >
-      <van-sidebar-item title="推荐课程" />
-    </van-sidebar> -->
     <!-- 课程内容 -->
     <ul class="courseList">
       <li class="courseItem">

@@ -5,6 +5,10 @@
       <div class="gou">√</div>支付成功
       <div class="back" @click="backIndex">返回首页</div>
     </div>
+        <!-- 标题部分 -->
+    <van-sidebar v-model="activeKey">
+      <van-sidebar-item title="推荐课程" />
+    </van-sidebar>
     <Coursegoods />
   </div>
 </template>
