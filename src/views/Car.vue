@@ -5,24 +5,25 @@
         <!-- 列表页 -->
         <main>
             <div class="car-list-title">
-                <van-checkbox v-model="allChecked" @change="change"></van-checkbox>
+                <span class="listnum" ref="listnum">{{ num }}</span>
                 <h3>秋季课</h3>
             </div>
             <!-- {{ flag }} -->
 
             <div class="car-list-item" v-for="(item,index) in carList" :key="index">
-                <!-- {{checked[index]}} -->
+                <!-- {{ checked[index] }} -->
                 <van-checkbox v-model="checked[index]" @change="allChange(index)"></van-checkbox>
                 <section>
-                    <h3>商品ID：{{ item.cartId }}</h3>
-                    <h4>商品名称：{{ item.productName }}</h4>
-                    <p>9月10日-11月10日 10：30-12：00</p>
+                    <h3>{{ item.productName }}</h3>
+                    <h4>教材本地化，同步校内，备战考试</h4>
+                    <p>
+                        <van-image width="12" :src="icon_04" />
+                        9月10日-11月10日 10：30-12：00</p>
                     <p>
                         <img :src="item.productImg" alt="" width="50px" height="50px">
-                        <img :src="item.productImg" alt="" width="50px" height="50px">
                     </p>
-                    <p><span>￥{{ item.productPrice }}</span>/十课时</p>
-                    <p><i>限时购</i>商品标签：{{ item.standard }}</p>
+                    <p><span>￥{{ item.productPrice }} </span><em>/十课时</em></p>
+                    <p><i>限时购</i>秋季班单科报名最低99元十课时</p>
                 </section>
             </div>
 
@@ -39,6 +40,7 @@
 </template>
 
 <script>
+import icon_04 from '../../public/icon/icon_04.png'
 export default {
     data() {
         return {
@@ -59,7 +61,8 @@ export default {
                 productPrice: 5888,
                 standard: "ssfsdcsdcsdffs",
                 count: 5
-            }]
+            }],
+            icon_04
         };
     },
 
@@ -75,10 +78,24 @@ export default {
             return sum*100;
         },
         num(){
+            // this.checked.forEach((item, index)=> {
+            //     this.checked.push(false);
+            // });
+            // console.log(this.checked);
             let sum=0;
             this.checked.forEach(function(item, index) {
                 sum+=item;
             });
+            if(sum!==0){
+                console.log(this.$refs.listnum);
+                if(this.$refs.listnum){
+                    this.$refs.listnum.style.backgroundColor='#1989fa';
+                }
+            }else{
+                if(this.$refs.listnum){
+                    this.$refs.listnum.style.backgroundColor='#fff';
+                }
+            }
             return sum;
         },
     },
@@ -109,34 +126,38 @@ export default {
         // 点击全选按钮，点亮，列表每一个checked为true；反之，false
         change(checked){
             // this.flag=true;
-                console.log(checked)
-                if(checked==true){
+            if(checked==true){
+                console.log(this.checked);
+                // for(let i=0;i<this.checked.length;i++){
+                //     this.checked[i]=true;
+                // }
+                this.checked.forEach((item, index,arr)=> {
+                    arr[index]=true;
+                });
+                console.log(this.checked);
+                this.checked = JSON.parse(JSON.stringify(this.checked))
+            }else{
+                if(this.flag==true){
                     console.log(this.checked);
                     // for(let i=0;i<this.checked.length;i++){
-                    //     this.checked[i]=true;
+                    //     this.checked[i]=false;
                     // }
                     this.checked.forEach((item, index,arr)=> {
-                        arr[index]=true;
+                        arr[index]=false;
                     });
                     console.log(this.checked);
-                    this.checked = JSON.parse(JSON.stringify(this.checked))
-                }else{
-                    if(this.flag==true){
-                        console.log(this.checked);
-                        // for(let i=0;i<this.checked.length;i++){
-                        //     this.checked[i]=false;
-                        // }
-                        this.checked.forEach((item, index,arr)=> {
-                            arr[index]=false;
-                        });
-                        console.log(this.checked);
-                        this.checked = JSON.parse(JSON.stringify(this.checked));
-                    }
+                    this.checked = JSON.parse(JSON.stringify(this.checked));
                 }
+            }
         },
         // 订单提交跳转支付页
         onSubmit(){
-            this.$router.push('/order')
+            if(this.total){
+                localStorage.setItem('total',this.total)
+                this.$router.push('/order');
+            }else{
+                console.log('购物车为空');
+            }
         }
     }
 };
@@ -145,6 +166,9 @@ export default {
 .car-container{
     width:100%;
     height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     
     main{
         width: 100%;
@@ -153,38 +177,59 @@ export default {
         display:flex;
         flex-direction:column;
         align-items:center;
+        box-shadow: 5pt 3pt 10pt -1pt #EDEDED;
     }
     // 分类标题
     .car-list-title{
         width:100%;
+        margin-top: 20px;
         line-height: 40px;
         display: flex;
+        border-bottom:1px solid #f9f9f9;
         h3{
+            font-weight: normal;
+            color:#333333;
             text-indent:20px;
             font-size: 16px;
         }
     } 
+    // 秋季班总数
+    .listnum{
+        display: block;
+        width: 20px;
+        height: 20px;
+        border: 1px solid rgb(200, 201, 204);
+        border-radius: 50%;
+        margin-top: 10px;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        color: #fff;
+        background-color: #fff;
+        // border-color: #1989fa;
+    }
     // 商品
     .car-list-item{
         width:100%;
         display:flex;
-        height: 165px;
-        margin: 15px 0;
-        border-bottom:1px solid #f9f9f9;
         .van-checkbox{
+            margin-top: 15px;
             height:20px;
+            margin-right: 20px;
         }
         section{
-            text-indent:20px;
             display:flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 150px;
+            padding: 15px 0;
+            height: 190px;
+            border-bottom:1px solid #f9f9f9;
         }
+        // 内容
         p {
-            font-size:10px;
+            font-size:8px;
             margin:0;
-            color: #bbbbbb;
+            color: #999999;
             span{
                 color: #f96400;
                 font-size:14px;
@@ -199,22 +244,33 @@ export default {
                 border-radius: 6px;
                 margin-right: 10px;
             }
+            em{
+                color: #EDEDED;
+            }
         }
+        // 课程标题
         h3{
+            color: #333333;
             font-size:16px;
+            line-height: 18px;
             margin:0;
-            font-weight:500;
+            font-weight:normal;
         }
+        // 课程详情
         h4{
-            font-size:14px;
+            color: #666666;
+            font-size:12px;
             margin:0;
-            font-weight:500;
+            font-weight:normal;
         }
         img{
             border-radius:50%;
         }
     }
     // 结算
+    .van-submit-bar{
+        box-shadow: 5pt 3pt 10pt -1pt #EDEDED;
+    }
     .van-button{
         text-align: center;
     }

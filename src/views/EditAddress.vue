@@ -12,8 +12,13 @@
         :area-columns-placeholder="['请选择', '请选择', '请选择']"
         @delete="onDelete"
         @change-detail="onChangeDetail"
+        
+        
+
         />
-        {{ $route.params.id }}
+        <!-- <p>{{ $route.params.id }}</p> -->
+        
+
     </div>
 </template>
 
@@ -88,7 +93,15 @@ export default {
                 status:content.isDefault ? 1 : 2
             });
         },
+        onChangeDetail(){
+            console.log('onChangeDetail');
+        }
     }
 };
 </script>
-<style lang='stylus' scoped></style>
+<style lang='scss'>
+.van-button--danger{
+    background-color: #4a66f5;
+    border: 0.02667rem solid #4a66f5;
+}
+</style>

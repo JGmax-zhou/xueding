@@ -58,11 +58,27 @@ export default {
 </script>
 <style lang='scss'>
 .address-container{
+    width:100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // 头部透明
+    .van-nav-bar {
+        background: transparent;
+    }
+    // 地址项目
+    .van-address-edit__fields{
+        border-radius: 4px;
+        background-color: #fff;
+    }
+
+    // 地址项目内容
     .van-address-item {
         padding: 0.32rem;
-        background-color: #fff;
-        border-radius: 0;
+        box-shadow: 5pt 3pt 10pt -1pt #EDEDED;
     }
+    // 按钮
     .van-address-item .van-radio__icon--checked .van-icon {
         background-color: #4a66f5;
         border-color: #4a66f5;
@@ -80,10 +96,25 @@ export default {
             line-height: 45px;
         }
     }
+    // 姓名颜色
+    .van-address-item__name{
+        color: #999;
+    }
+    // 地址颜色
+    .van-address-item__address{
+        color: #999;
+    }
+    // 默认标签
+    .van-tag{
+        padding: 3px 6px;
+        font-size: 10px;
+    }
     .van-address-list__bottom {
         position: relative;
         top: 8px;
         height: 45px;
+        border-radius: 4px;
+        box-shadow: 5pt 3pt 10pt -1pt #EDEDED;
     }
 
 }
