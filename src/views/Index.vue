@@ -3,10 +3,12 @@
     <!-- 首页头部搜索栏 -->
     <indexHeader />
     <!-- tab导航栏 -->
-    <van-tabs v-model="active" color="#4966F5" @click="dowNav">
-      <van-tab v-for="(value,index) in tab" :key="index" :title="value" ></van-tab>
+    <van-tabs v-model="active" color="#4966F5" @change="dowNav" swipeable animated  >
+      <van-tab v-for="(value,index) in tab" :key="index" :title="value" >
+        <router-view></router-view>
+      </van-tab>
     </van-tabs>
-    <router-view></router-view>
+    
   </div>
 </template>
 
@@ -65,7 +67,6 @@ export default {
   flex-direction: column;
   align-items: center;
   // background: red;
-  
 }
 </style>
 

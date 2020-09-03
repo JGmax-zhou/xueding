@@ -22,6 +22,7 @@ export default {};
   display: flex;
   flex-direction: column;
   margin-top: 30px;
+  margin-left:10px;
   h2 {
     width: 100%;
     font-size: 17px;
@@ -34,9 +35,10 @@ export default {};
     display: flex;
     flex-direction: column;
     position: relative;
-    box-shadow: 5px 5px 10px 1px #ddd;
+    box-shadow: 2px 2px 10px 1px #ddd;
     border-radius: 10px;
     margin-top:10px;
+    margin-left:10px;
     h3 {
       font-size: 14px;
       margin-top: 20px;

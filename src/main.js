@@ -24,6 +24,7 @@ import {
     Grid, //宫格、金刚区
     GridItem, //宫格、金刚区
     Image, //图片
+    Popup, //Popup 弹出层
     Rate,
     Checkbox,
     CheckboxGroup,
@@ -63,7 +64,7 @@ Vue.use(AddressEdit);
 Vue.use(CellGroup);
 Vue.use(RadioGroup);
 Vue.use(Radio);
-// Vue.use(VanImage);
+Vue.use(Popup);
 
 Vue.config.productionTip = false
 new Vue({

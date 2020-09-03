@@ -9,6 +9,7 @@
         :key="index"
         :icon="value.img"
         :text="value.tit"
+        @click="SeleCourse(index)"
       />
     </van-grid>
     <!-- 名师人气榜 -->
@@ -119,14 +120,13 @@ export default {
   },
 
  async mounted() {
-   const a=await getIndex()
-   console.log(a)
+  //  const a=await getIndex()
+  //  console.log(a)
   },
 
   methods: {
-    dowNav(title){
-      console.log(1)
-      this.$router.push("/index/nav/"+title)
+    SeleCourse(id){
+      this.$router.push("/index-SeleCourse/"+id)
     }
   },
 };
@@ -165,6 +165,7 @@ export default {
   .video {
     padding: 0px 5px 0px 5px;
     display: flex;
+    margin-top: 5px;
     // flex-direction: column;
     .videoItem {
       display: flex;

@@ -1,9 +1,10 @@
 <template>
     <div class="navContent">
-        课程
+        <Coursegoods v-for="(value,index) in 5" :key="index"/>
     </div>
 </template>
 <script>
+import Coursegoods from "../components/Coursegoods"
 export default {
     data() {
         return {
@@ -11,7 +12,15 @@ export default {
         }
     },
     components:{
-        indexNavCourse
+        Coursegoods
     }
 }
 </script>
+<style lang="scss" scoped>
+    .navContent{
+        margin-bottom: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>

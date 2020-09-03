@@ -118,6 +118,11 @@ const routes = [{
         ]
     },
     {
+        path: '/index-SeleCourse/:id', //首页金刚导航区//选课
+        component: () =>
+            import ("../views/index-SeleCourse.vue")
+    },
+    {
         path: '/Colect',
         component: () =>
             import ('../views/MineColect.vue'),

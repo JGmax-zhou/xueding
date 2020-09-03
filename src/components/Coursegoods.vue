@@ -2,9 +2,9 @@
   <div id="coursegoods">
           <!-- 推荐课程页面 -->
     <!-- 标题部分 -->
-    <van-sidebar v-model="activeKey">
+    <!-- <van-sidebar >
       <van-sidebar-item title="推荐课程" />
-    </van-sidebar>
+    </van-sidebar> -->
     <!-- 课程内容 -->
     <ul class="courseList">
       <li class="courseItem">
@@ -73,13 +73,14 @@ export default {
 </script>
 <style lang='scss' scoped>
 #coursegoods{
+  margin-bottom: 10px;
     .courseList {
     .courseItem {
       width: 355px;
       height: 209px;
       border-radius: 2px;
       position: relative;
-      background: lightgray;
+       box-shadow: 2px 2px 10px 1px #ddd;
       .icon {
         margin: 0px 32px 0px 6px;
       }
@@ -103,6 +104,7 @@ export default {
       .lecturer{
           display: flex;
           border-bottom: 1px solid #E5E5E5;
+          margin-bottom: 15px;
           .information {
               margin-top: 20px;
               margin-left: 17px;
@@ -134,6 +136,7 @@ export default {
           font-size: 10px;
           color: #999999;
           text-decoration: line-through;
+          margin-left: 15px;
       }
       .currPrice{
           font-size: 14px;
@@ -150,7 +153,7 @@ export default {
           color: white;
           background: linear-gradient(#0798FF,#4966F5);
           position: absolute;
-          right: 0;
+          right: 15px;
           bottom: 16px;
       }
     }

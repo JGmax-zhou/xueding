@@ -47,7 +47,7 @@ export default {
   .cardWrap {
       background: #fff;
     position: relative;
-    box-shadow: 5px 5px 10px 1px #ddd;
+    box-shadow: 2px 2px 10px 1px #ddd;
     width: 355px;
     height: 130px;
     margin-bottom: 20px;

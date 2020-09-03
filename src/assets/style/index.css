@@ -7,12 +7,12 @@
 /* 搜索框 */
 
 .van-field__body>input {
-    background: #ddd;
+    background: #eee;
     /* color: #000; */
 }
 
 .van-search__content {
-    background: #ddd;
+    background: #eee;
     border-radius: 3px;
 }
 
@@ -49,3 +49,17 @@
 /* .van-grid-item__content--center {
     background: #f5f5f5;
 } */
+
+
+/* ------------------------------------- */
+
+
+/* 首页导航栏选中字体放大加粗 */
+
+.van-tab--active>.van-tab__text {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+/* ----------------------------------------- */
