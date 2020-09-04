@@ -76,7 +76,7 @@
           <b class="delail_poetry_one_s2">诗歌：常见意向梳理</b>
           <p class="delail_poetry_one_p">9月4日 周五19:00-21:00</p>
         </div>
-        <div class="delail_poetry_tow">
+        <div class="delail_poetry_one">
           <span class="delail_poetry_one_s1">第02讲</span>
           <b class="delail_poetry_one_s2">诗歌：鉴赏常考题材之咏物传志</b>
           <p class="delail_poetry_one_p">9月11日 周五19:00-21:00</p>
@@ -108,6 +108,7 @@ export default {
   data() {
     return {
       value: 3,
+      poetry: [],
     };
   },
 };
