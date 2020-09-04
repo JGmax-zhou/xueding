@@ -18,11 +18,11 @@ export default {};
 </script>
 <style lang="scss" scoped>
 .indexMathHeacher {
-  width: 100%;
+  // width: 346px;
   display: flex;
   flex-direction: column;
   margin-top: 30px;
-  margin-left:10px;
+  // margin-left:10px;
   h2 {
     width: 100%;
     font-size: 17px;

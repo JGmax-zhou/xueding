@@ -1,4 +1,4 @@
-.van-search {
+.headerWrap .van-search {
     height: 26px;
     width: 246px;
 }
@@ -8,7 +8,6 @@
 
 .van-field__body>input {
     background: #eee;
-    /* color: #000; */
 }
 
 .van-search__content {

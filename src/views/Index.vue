@@ -1,28 +1,33 @@
 <template>
   <div class="indexContainer">
     <!-- 首页头部搜索栏 -->
-    <indexHeader :hasback="false" :menu="true"/>
+    <indexHeader :hasback="false" :menu="true" />
     <!-- tab导航栏 -->
-    <van-tabs v-model="active" color="#4966F5" @change="dowNav" swipeable animated  >
-      <van-tab v-for="(value,index) in tab" :key="index" :title="value" >
+    <van-tabs
+      v-model="active"
+      color="#4966F5"
+      @change="dowNav"
+      swipeable
+      :animated="animated"
+    >
+      <van-tab v-for="(value,index) in indexTab" :key="index" :title="value">
         <router-view></router-view>
       </van-tab>
     </van-tabs>
-    
   </div>
 </template>
 
 <script>
 import indexHeader from "../components/index/index-header"; //首页头部组件
 import "../assets/style/index.css"; //首页组件css修改文件
+import { mapState } from "vuex"; //引入vuex辅助函数
+
 // import { getIndex } from "../utils/api";
 
 export default {
   data() {
     return {
-      active:0,
-      tab: ["精选", "数学", "语文", "英语", "化学", "物理", "生物"],
-      indexs:0,
+      indexs: 0,
       // backtrack:false
     };
   },
@@ -32,33 +37,47 @@ export default {
   },
 
   computed: {
-   
+    ...mapState([
+      "animated",
+      "indexTab", //首页导航栏动画效果控制
+    ]),
+    active:{
+      get(){
+        return this.$store.state.navIndex
+      },
+      set(val){
+        this.$store.dispatch('changeit',val)
+      }
+    }
   },
-   mounted() {
+  mounted() {
     // const a = await getIndex();
     // console.log(a);
-    this.active=sessionStorage.getItem("nav")? +sessionStorage.getItem("nav"):0
+    this.active = sessionStorage.getItem("nav")
+      ? +sessionStorage.getItem("nav")
+      : 0; //导航栏样式控制
+    this.$store.commit("getAnimated"); //首页导航栏动画效果控制
   },
 
   methods: {
     dowNav(title) {
       if (title == 0) {
+        //路由首页精选页
         this.$router.push("/index/index-choiceness/" + title);
-        window.sessionStorage.setItem("nav", title); 
-        this.index=title
-      }else{
-         this.$router.push("/index/index-nav/" + title)
-         window.sessionStorage.setItem("nav", title); 
-         this.index=title
+        window.sessionStorage.setItem("nav", title);
+        this.index = title;
+      } else {
+        //路由首页"精选", "数学", "语文", "英语", "化学", "物理", "生物"页
+        this.$router.push("/index/index-nav/" + title);
+        window.sessionStorage.setItem("nav", title);
+        this.index = title;
       }
-      
-      // if(this.$route.params.id==0 && title!=0){
-      //   this.$router.push("/index/index-nav/" + title);
-      // }
-      // this.$route.params.id=title
-      // console.log(this.$route.params.id)
     },
-    
+  },
+  beforeRouteLeave(to, from, next) {
+    //首页导航栏动画效果控制
+    this.$store.commit("cancelAnimated");
+    next();
   },
 };
 </script>
