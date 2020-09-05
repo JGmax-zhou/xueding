@@ -15,7 +15,12 @@
     <!-- 名师人气榜 -->
     <h2>名师人气榜</h2>
     <van-grid class="popularity" :border="false" :column-num="3">
-      <van-grid-item v-for="(value,index) in popularityTeacher" :key="index">
+      <!-- 教师 -->
+      <van-grid-item
+        v-for="(value,index) in popularityTeacher"
+        :key="index"
+        @click="teacherPage(index)"
+      >
         <van-image :src="value.img" />
         <p class="teacherName">{{value.name}}</p>
         <span class="educationBg">{{value.eb}}</span>
@@ -35,7 +40,7 @@
     <h2>暑假班</h2>
     <!-- 暑假班商品渲染 -->
     <commodityCard />
-     <h2>秋季班</h2>
+    <h2>秋季班</h2>
     <!-- 秋季班商品渲染 -->
     <commodityCard />
   </div>
@@ -43,7 +48,7 @@
 
 <script>
 import indexMathHeacher from "../components/index/index-MathHeacher"; //数学人气名师部分
-import commodityCard from "../components/public/icommodityCard"
+import commodityCard from "../components/public/icommodityCard";
 import "../assets/style/index.css"; //首页组件css修改文件
 import icon09 from "../assets/icon/icon_09.png"; //导航金刚区图片
 import icon10 from "../assets/icon/icon_10.png"; //导航金刚区图片
@@ -55,7 +60,7 @@ import icon15 from "../assets/icon/icon_15.png"; //名师榜
 import img05 from "../assets/images/img_05.png"; //视频
 import img04 from "../assets/images/img_04.png"; //视频
 
-import {getIndex} from "../utils/api"
+import { getIndex } from "../utils/api";
 
 export default {
   data() {
@@ -112,22 +117,24 @@ export default {
 
   components: {
     indexMathHeacher,
-    commodityCard
+    commodityCard,
   },
 
-  computed: {
-    
-  },
+  computed: {},
 
- async mounted() {
-  //  const a=await getIndex()
-  //  console.log(a)
+  async mounted() {
+    //  const a=await getIndex()
+    //  console.log(a)
   },
 
   methods: {
-    SeleCourse(id){
-      this.$router.push("/index-SeleCourse/"+id)
-    }
+    SeleCourse(id) {
+      this.$router.push("/index-SeleCourse/" + id);
+    },
+    teacherPage(id) {
+      //跳转教师详情页
+      this.$router.push("/details-teacher/" + id);
+    },
   },
 };
 </script>
@@ -191,7 +198,7 @@ export default {
         font-family: "苹方-简 中黑体";
         color: #666666;
         width: 130px;
-         margin-top: 5px;
+        margin-top: 5px;
       }
     }
   }
