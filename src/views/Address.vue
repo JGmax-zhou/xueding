@@ -1,57 +1,58 @@
 <template>
     <div class="address-container">
         <!-- 标题 -->
-        <van-nav-bar title="我的收货地址" fixed placeholder z-index="10" left-arrow @click-left="onClickLeft" />
+        <van-nav-bar title="我的收货地址" fixed placeholder z-index="10" left-arrow @click-left="addressOnClickLeft" />
         <van-address-list
-        v-model="chosenAddressId"
+        v-model="chosenAddressId[0]"
         :list="list"
         default-tag-text="默认"
-        @add="onAdd"
-        @edit="onEdit"
+        @add="addressOnAdd"
+        @edit="addressOnEdit"
         />
     </div>
 </template>
 
 <script>
+import { mapState,mapGetters } from "vuex";
 export default {
     data() {
         return {
-            chosenAddressId: '1',
-            list: [
-                {
-                id: '1',
-                name: '张三',
-                tel: '13000000000',
-                address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室',
-                isDefault: true,
-                },
-                {
-                id: '2',
-                name: '李四',
-                tel: '1310000000',
-                address: '浙江省杭州市拱墅区莫干山路 50 号',
-                },
-            ]
         };
     },
 
     components: {},
 
-    computed: {},
+    computed: {
+        ...mapState({
+            chosenAddressId(){
+                return this.$store.state.address.chosenAddressId
+            },
+            list(){
+                return this.$store.state.address.list
+            },
+        })
+    },
 
     mounted() {},
 
     methods: {
-        onAdd() {
-            console.log('新增地址');
-            this.$router.push('/addaddress');
+        // 新增地址
+        addressOnAdd() {
+            this.$store.commit('addressOnAdd',this.$router);
         },
-        onEdit(item, index) {
+        // 编辑地址
+        addressOnEdit(item, index) {
             console.log('编辑地址:' + index);
-            this.$router.push('/editaddress/'+index);
+            // this.$router.push('/editaddress/' + index);
+            console.log(this.$router);
+            this.$store.commit('addressOnEdit',{
+                $router:this.$router,
+                index:index}
+            );
         },
-        onClickLeft() {
-            this.$router.go(-1);
+        // 返回上一页
+        addressOnClickLeft() {
+            this.$store.commit('addressOnClickLeft',this.$router);
         },
     }
 };

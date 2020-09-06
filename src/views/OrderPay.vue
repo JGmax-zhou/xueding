@@ -1,7 +1,7 @@
 <template>
     <div class="pay-container" >
         <!-- 标题 -->
-        <van-nav-bar title="支付订单" fixed placeholder z-index="10" left-arrow @click-left="onClickLeft" />
+        <van-nav-bar title="支付订单" fixed placeholder z-index="10" left-arrow @click-left="orderpayOnClickLeft" />
         <!-- 支付剩余时间 -->
         <section class="surplus-box">
             <span class="surplus">支付剩余时间 15：00</span>
@@ -31,7 +31,7 @@
             </van-cell>
             </van-radio-group>
         </van-cell-group>
-        <van-button round type="info" @click="pay">确认支付</van-button>
+        <van-button round type="info" @click="orderpayPay">确认支付</van-button>
     </div>
 </template>
 
@@ -39,6 +39,7 @@
 import icon_38 from '../../public/icon/icon_38.png'
 import icon_39 from '../../public/icon/icon_39.png'
 import icon_40 from '../../public/icon/icon_40.png'
+import { mapState,mapGetters } from "vuex";
 export default {
     data() {
         return {
@@ -57,11 +58,11 @@ export default {
     mounted() {},
 
     methods: {
-        onClickLeft(){
-            this.$router.go(-1);
+        orderpayOnClickLeft(){
+            this.$store.commit('orderpayOnClickLeft',this.$router);
         },
-        pay(){
-            this.$router.push('/OrderSuccess');
+        orderpayPay(){
+            this.$store.commit('orderpayPay',this.$router);
         }
     }
 };
