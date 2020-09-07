@@ -3,14 +3,8 @@
     <!-- 首页头部搜索栏 -->
     <indexHeader :hasback="false" :menu="true" />
     <!-- tab导航栏 -->
-    <van-tabs
-      v-model="active"
-      color="#4966F5"
-      @change="dowNav"
-      swipeable
-      :animated="animated"
-    >
-      <van-tab v-for="(value,index) in indexTab" :key="index" :title="value">
+    <van-tabs v-model="active" color="#4966F5" @change="dowNav" swipeable :animated="animated">
+      <van-tab v-for="(value,index) in indexTab" :key="index" :title="value.name">
         <router-view></router-view>
       </van-tab>
     </van-tabs>
@@ -20,7 +14,10 @@
 <script>
 import indexHeader from "../components/index/index-header"; //首页头部组件
 import "../assets/style/index.css"; //首页组件css修改文件
-import { mapState } from "vuex"; //引入vuex辅助函数
+import { createNamespacedHelpers } from "vuex"; //引入vuex辅助函数
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers(
+  "indexHome"
+); //引入vuex辅助函数
 
 // import { getIndex } from "../utils/api";
 
@@ -41,25 +38,30 @@ export default {
       "animated",
       "indexTab", //首页导航栏动画效果控制
     ]),
-    active:{
-      get(){
-        return this.$store.state.navIndex
+    active: {
+      get() {
+        return this.$store.state.indexHome.navIndex;
       },
-      set(val){
-        this.$store.dispatch('changeit',val)
-      }
-    }
+      set(val) {
+        // this.$store.dispatch('changeit',val)
+        this.changeit(val);
+      },
+    },
   },
   mounted() {
-    // const a = await getIndex();
-    // console.log(a);
     this.active = sessionStorage.getItem("nav")
       ? +sessionStorage.getItem("nav")
       : 0; //导航栏样式控制
-    this.$store.commit("getAnimated"); //首页导航栏动画效果控制
+    this.getAnimated(); //首页导航栏动画效果控制
+    this.getIndexNav();//首页数据请求
   },
 
   methods: {
+    ...mapMutations(["getAnimated", "cancelAnimated"]),
+    ...mapActions([
+      "changeit",
+      "getIndexNav", //首页数据请求
+    ]),
     dowNav(title) {
       if (title == 0) {
         //路由首页精选页
@@ -76,7 +78,8 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     //首页导航栏动画效果控制
-    this.$store.commit("cancelAnimated");
+    // this.$store.commit("indexHome/cancelAnimated");
+    this.cancelAnimated();
     next();
   },
 };

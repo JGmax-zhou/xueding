@@ -19,11 +19,11 @@
       <van-grid-item
         v-for="(value,index) in popularityTeacher"
         :key="index"
-        @click="teacherPage(index)"
+        @click="teacherPage(value.id)"
       >
-        <van-image :src="value.img" />
+        <van-image :src="value.images" />
         <p class="teacherName">{{value.name}}</p>
-        <span class="educationBg">{{value.eb}}</span>
+        <span class="educationBg">{{value.info}}</span>
       </van-grid-item>
     </van-grid>
     <!-- 数学人气名师带你拿高分 -->
@@ -60,7 +60,10 @@ import icon15 from "../assets/icon/icon_15.png"; //名师榜
 import img05 from "../assets/images/img_05.png"; //视频
 import img04 from "../assets/images/img_04.png"; //视频
 
-import { getIndex } from "../utils/api";
+import { createNamespacedHelpers } from "vuex"; //引入vuex辅助函数
+const { mapState, mapActions } = createNamespacedHelpers(
+  "indexHome"
+); //引入vuex辅助函数
 
 export default {
   data() {
@@ -83,23 +86,23 @@ export default {
           tit: "我的课程",
         },
       ],
-      popularityTeacher: [
-        {
-          img: icon13,
-          name: "杨老师",
-          eb: "浙江大学研究生",
-        },
-        {
-          img: icon14,
-          name: "杨老师",
-          eb: "浙江大学研究生",
-        },
-        {
-          img: icon15,
-          name: "杨老师",
-          eb: "浙江大学研究生",
-        },
-      ],
+      // popularityTeacher: [
+      //   {
+      //     img: icon13,
+      //     name: "杨老师",
+      //     eb: "浙江大学研究生",
+      //   },
+      //   {
+      //     img: icon14,
+      //     name: "杨老师",
+      //     eb: "浙江大学研究生",
+      //   },
+      //   {
+      //     img: icon15,
+      //     name: "杨老师",
+      //     eb: "浙江大学研究生",
+      //   },
+      // ],
       video: [
         {
           img: img05,
@@ -120,14 +123,18 @@ export default {
     commodityCard,
   },
 
-  computed: {},
+  computed: {
+    ...mapState(['popularityTeacher'])//首页名师人气榜数据请求
+  },
 
-  async mounted() {
-    //  const a=await getIndex()
-    //  console.log(a)
+   mounted() {
+    this.getPopularityTeacher()
   },
 
   methods: {
+    ...mapActions([
+      'getPopularityTeacher',//首页名师人气榜数据请求
+      ]),
     SeleCourse(id) {
       this.$router.push("/index-SeleCourse/" + id);
     },

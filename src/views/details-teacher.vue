@@ -149,6 +149,7 @@ export default {
     left: 15px;
     z-index: 3;
     color: #fff;
+    font-size: 24px;
   }
   .detailsTeacherHeader {
     //头部
@@ -352,10 +353,10 @@ export default {
                 }
               }
             }
-            .van-popup--bottom {
-              //弹出层宽度
-              width: 375px;
-            }
+            // .van-popup--bottom {
+            //   弹出层宽度
+            //   width: 375px;
+            // }
           }
           .consultAX {
             background: rgba(0, 0, 0, 0.3);

@@ -40,7 +40,9 @@
 </template>
 
 <script>
-import { mapState } from "vuex"; //引入vuex辅助函数
+// import { mapState } from "vuex"; //引入vuex辅助函数
+import { createNamespacedHelpers } from 'vuex' //引入vuex辅助函数
+const { mapState,mapMutations,mapActions } = createNamespacedHelpers('indexHome') //引入vuex辅助函数
 export default {
   props: { hasback: Boolean, menu: Boolean },
   data() {
@@ -67,6 +69,12 @@ export default {
   },
 
   methods: {
+     ...mapMutations([
+       'DQgradeXGS'
+     ]),
+     ...mapActions([
+       'changeit'
+     ]),
     indexback() {
       //返回上一页
       this.$router.go(-1);
@@ -82,7 +90,8 @@ export default {
     },
     classDow(title) {
       this.show = false;
-      this.$store.dispatch("changeit", title);
+      this.changeit(title);
+      // console.log(1);
     },
     gradeDow() {
       //学历下拉
@@ -92,7 +101,7 @@ export default {
       this.grade = false;
     },
     DQgradeXG(value){//修改vue显示当前年级
-      this.$store.commit("DQgradeXGS", value);
+      this.DQgradeXGS(value);
       this.grade = false;
     }
   },
