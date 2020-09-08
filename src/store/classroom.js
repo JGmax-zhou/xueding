@@ -11,7 +11,7 @@ const classroom = {
     mutations: {
         //免费直播课
         changeClassFreeData(state, payload) {
-            state.classFreeData = payload.data.data.result
+            state.classFreeData = payload.data.result
         }
     },
     actions: {

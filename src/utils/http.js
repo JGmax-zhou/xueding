@@ -59,7 +59,7 @@ const http = {
             // 引入一个qs的包
             instance.post(url, qs.stringify(params))
                 .then((res) => {
-                    resolve(res)
+                    resolve(res.data)
                 })
                 .catch((err) => {
                     Toast(err.message)
