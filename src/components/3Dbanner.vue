@@ -13,9 +13,6 @@
       <swiper-slide>
           <img src="../assets/images/img_24.png" alt="">
       </swiper-slide>
-      <swiper-slide>Slide 5</swiper-slide>
-      <swiper-slide>Slide 6</swiper-slide>
-      <swiper-slide>Slide 7</swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
   </div>
@@ -58,10 +55,11 @@
 <style lang="scss" scoped>
   .example-3d {
     width: 100%;
-    height: 200px;
+    height: 100%;
+    margin-top: 46px;
     padding-top: 20px;
     padding-bottom: 30px;
-background: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599133173899&di=74cf528cf66ba2d7389fffdfa5e9661e&imgtype=0&src=http%3A%2F%2Fphoto.16pic.com%2F00%2F38%2F54%2F16pic_3854588_b.jpg');
+    // background: url('../assets/images/bg.jpg');
   }
 
   .swiper {
@@ -81,10 +79,9 @@ background: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000
       background-position: center;
       background-size: cover;
       color: white;
-    //   img{
-    //       width: 300px;
-    //       height: 300px;
-    //   }
+      img{
+        border-radius: 10px;
+      }
     }
 
     .swiper-pagination {

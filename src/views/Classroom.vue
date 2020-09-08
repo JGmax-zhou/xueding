@@ -3,7 +3,6 @@
     <!-- 标题部分 -->
     <van-nav-bar title="课堂" fixed placeholder id="classroom" />
     <!-- 轮播图 -->
-
     <banner />
     <!-- 直播课内容 -->
     <main>
@@ -16,15 +15,10 @@
           </van-sidebar>
         </article>
         <ul class="info">
-          <li>
-            <img src="../assets/images/img_13.png" alt />
-            <h4>语文-作文题目分析</h4>
-            <p>10月12日 9:00-10:00</p>
-          </li>
-          <li>
-            <img src="../assets/images/img_13.png" alt />
-            <h4>语文-作文题目分析</h4>
-            <p>10月12日 9:00-10:00</p>
+          <li v-for="(item,index) in classFreeList" :key="index" v-show="index<2">
+            <img :src="item.src" alt />
+            <h4>{{item.title}}</h4>
+            <p>{{item.date}}</p>
           </li>
         </ul>
       </div>
@@ -65,16 +59,15 @@
           </li>
         </ul>
       </div>
-
       <!-- 精彩回放-->
       <div class="Livefree">
         <article>
           <van-sidebar v-model="activeKey">
-            <van-sidebar-item title="即将开始" />
+            <van-sidebar-item title="精彩回放" />
             <div class="more">更多&nbsp;></div>
           </van-sidebar>
         </article>
-        <van-tabs v-model="active">
+        <van-tabs v-model="active1">
           <van-tab title="学科"></van-tab>
           <van-tab title="年级"></van-tab>
           <van-tab title="上课形式"></van-tab>
@@ -112,11 +105,33 @@ export default {
     return {
       activeKey: 0,
       active: 0,
+      active1:0,
+      classFreeList:{}
     };
   },
   components: {
-    banner
+    banner,
+  },
+
+  methods: {
+    async ClassFreeData() {
+      await this.$store.dispatch("getClassFreeData");
+      this.classFreeList = this.$store.state.classroom.classFreeData
+      console.log(this.classFreeList);
     },
+  },
+
+  mounted() {
+    //激活异步方法
+    this.ClassFreeData();
+  },
+
+  computed: {
+    //实时监听免费直播课数据
+    getClassFreeData() {
+      return this.$store.state.classroom.getClassFreeData;
+    },
+  },
 };
 </script>
 
@@ -128,9 +143,10 @@ export default {
   font-size: 17px;
   color: #333333;
   height: 46px;
-}
-.van-nav-bar--fixed {
-  margin-bottom: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
 }
 
 // 轮播图
