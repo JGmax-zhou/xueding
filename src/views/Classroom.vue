@@ -3,18 +3,7 @@
     <!-- 标题部分 -->
     <van-nav-bar title="课堂" fixed placeholder id="classroom" />
     <!-- 轮播图 -->
-    <van-swipe :loop="false" :width="320">
-      <!-- <van-swipe-item>
-        <img src="https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_02.png" alt />
-      </van-swipe-item>
-      <van-swipe-item>
-        <img src="http://localhost:8080/img/img_25.9fa50913.png" alt />
-      </van-swipe-item> -->
-      <van-swipe-item v-for="item in datalist" :key="item">
-        <img :src="item" alt />
-      </van-swipe-item>
-    </van-swipe>
-
+    <banner />
     <!-- 直播课内容 -->
     <main>
       <!-- 免费直播课 -->
@@ -26,15 +15,10 @@
           </van-sidebar>
         </article>
         <ul class="info">
-          <li>
-            <img src="../assets/images/img_13.png" alt />
-            <h4>语文-作文题目分析</h4>
-            <p>10月12日 9:00-10:00</p>
-          </li>
-          <li>
-            <img src="../assets/images/img_13.png" alt />
-            <h4>语文-作文题目分析</h4>
-            <p>10月12日 9:00-10:00</p>
+          <li v-for="(item,index) in classFreeList" :key="index" v-show="index<2">
+            <img :src="item.src" alt />
+            <h4>{{item.title}}</h4>
+            <p>{{item.date}}</p>
           </li>
         </ul>
       </div>
@@ -63,7 +47,7 @@
             <h4>语文-作文题目分析</h4>
             <p>10月12日 9:00-10:00</p>
           </li>
-                    <li>
+          <li>
             <img src="../assets/images/img_13.png" alt />
             <h4>语文-作文题目分析</h4>
             <p>10月12日 9:00-10:00</p>
@@ -75,16 +59,15 @@
           </li>
         </ul>
       </div>
-
       <!-- 精彩回放-->
       <div class="Livefree">
         <article>
           <van-sidebar v-model="activeKey">
-            <van-sidebar-item title="即将开始" />
+            <van-sidebar-item title="精彩回放" />
             <div class="more">更多&nbsp;></div>
           </van-sidebar>
         </article>
-        <van-tabs v-model="active">
+        <van-tabs v-model="active1">
           <van-tab title="学科"></van-tab>
           <van-tab title="年级"></van-tab>
           <van-tab title="上课形式"></van-tab>
@@ -100,7 +83,7 @@
             <h4>语文-作文题目分析</h4>
             <p>10月12日 9:00-10:00</p>
           </li>
-                    <li>
+          <li>
             <img src="../assets/images/img_13.png" alt />
             <h4>语文-作文题目分析</h4>
             <p>10月12日 9:00-10:00</p>
@@ -112,21 +95,42 @@
           </li>
         </ul>
       </div>
-
     </main>
   </div>
 </template>
 <script>
+import banner from "../components/3Dbanner";
 export default {
   data() {
     return {
       activeKey: 0,
-      active:0,
-      datalist:[
-        'https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_02.png',
-        'https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_02.png'
-      ]
+      active: 0,
+      active1:0,
+      classFreeList:{}
     };
+  },
+  components: {
+    banner,
+  },
+
+  methods: {
+    async ClassFreeData() {
+      await this.$store.dispatch("getClassFreeData");
+      this.classFreeList = this.$store.state.classroom.classFreeData
+      console.log(this.classFreeList);
+    },
+  },
+
+  mounted() {
+    //激活异步方法
+    this.ClassFreeData();
+  },
+
+  computed: {
+    //实时监听免费直播课数据
+    getClassFreeData() {
+      return this.$store.state.classroom.getClassFreeData;
+    },
   },
 };
 </script>
@@ -139,9 +143,10 @@ export default {
   font-size: 17px;
   color: #333333;
   height: 46px;
-}
-.van-nav-bar--fixed {
-  margin-bottom: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
 }
 
 // 轮播图
@@ -196,17 +201,16 @@ main {
   }
 
   // tab切换
-  .van-tabs__wrap{
+  .van-tabs__wrap {
     margin-top: -20px;
-margin-bottom: 10px;
-
+    margin-bottom: 10px;
   }
-.van-tabs__nav{
-  background: transparent;
-}
-.van-tabs__line{
-  background: #4966F5;
-}
+  .van-tabs__nav {
+    background: transparent;
+  }
+  .van-tabs__line {
+    background: #4966f5;
+  }
 }
 
 .van-sidebar-item--select::before {
@@ -214,6 +218,4 @@ margin-bottom: 10px;
   height: 24px;
   background: #4966f5;
 }
-
-
 </style>

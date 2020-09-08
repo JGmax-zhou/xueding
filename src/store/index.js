@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import indexHome from './index-home'
 
 Vue.use(Vuex)
+
+// 引入vuex组件
+import indexHome from './index-home'
+import classroom from './classroom'
+
 
 export default new Vuex.Store({
     state: {
@@ -53,6 +57,7 @@ export default new Vuex.Store({
 
     },
     modules: {
-        indexHome
+        indexHome,
+        classroom
     }
 })

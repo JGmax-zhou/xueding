@@ -46,10 +46,9 @@ const http = {
                     params: params
                 }) // 相应的拦截
                 .then(res => {
-                    resolve(res.data)
+                    resolve(res)
                 })
                 .catch(err => {
-                    // console.log(err.message)
                     Toast(err.message)
                 })
         })
@@ -60,7 +59,7 @@ const http = {
             // 引入一个qs的包
             instance.post(url, qs.stringify(params))
                 .then((res) => {
-                    resolve(res.data)
+                    resolve(res)
                 })
                 .catch((err) => {
                     Toast(err.message)
