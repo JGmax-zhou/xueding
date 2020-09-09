@@ -19,3 +19,5 @@ export function getClassFreeData(params) {
 export function getCarList(params) {
     return http.post('/', params)
 }
+
+
