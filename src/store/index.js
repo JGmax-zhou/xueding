@@ -3,27 +3,35 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+import { getCarList, deleteCarList, getAddressList, addAddressList, editAddressList, deleteAddressList } from "@/utils/api";
+
 import icon_04 from '../../public/icon/icon_04.png'
 const car = {
-    // namespaced: true, //添加命名空间
+    namespaced: true, //添加命名空间
     state: () => ({
         allChecked: [false],
-        checked: [false, false],
+        checked: [],
         flag: true,
         carList: [{
-            cartId: "5e5912670c4d5e2af8af87b1",
-            productImg: "http://haitao.nosdn1.127.net/09f5c35defd7464695dbb40c5f472c981572572175170k2fgvc4z14047.jpg?imageView&thumbnail=800x0&quality=85",
-            productName: "秋季课程 初三高数",
-            productPrice: 5888,
-            standard: "ssfsdcsdcsdffs",
-            count: 5
-        }, {
-            cartId: "5e5912670c4d5e2af8af87b1",
-            productImg: "http://haitao.nosdn1.127.net/09f5c35defd7464695dbb40c5f472c981572572175170k2fgvc4z14047.jpg?imageView&thumbnail=800x0&quality=85",
-            productName: "秋季课程 初三高数",
-            productPrice: 5888,
-            standard: "ssfsdcsdcsdffs",
-            count: 5
+            currentPrice: 1500,
+            id: 1,
+            info: "教学本地化，备战高考",
+            season: "秋季班",
+            teachers: [{
+                id: 4,
+                images: "https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_07.png",
+                info: "清华大学硕士研究生",
+                name: "张老师",
+                position: "讲师"
+            }, {
+                id: 5,
+                images: "https://mybucket-lcx.oss-cn-hangzhou.aliyuncs.com/images/img_08.png",
+                info: "北京大学学士",
+                name: "赵老师",
+                position: "班主任"
+            }],
+            time: "9月4日-12月18日 周五晚上19：00-21：00  |  16次课",
+            title: "高一数学秋季精品班（周日10：30）"
         }],
         icon_04
     }),
@@ -44,7 +52,8 @@ const car = {
                 state.allChecked = JSON.parse(JSON.stringify(state.allChecked));
                 state.flag = false;
             }
-            state.checked = JSON.parse(JSON.stringify(state.checked))
+            state.checked = JSON.parse(JSON.stringify(state.checked));
+            console.log(state.checked);
         },
         // 点击全选按钮，点亮，列表每一个checked为true；反之，false
         carChange(state, checked) {
@@ -66,25 +75,53 @@ const car = {
                     state.checked = JSON.parse(JSON.stringify(state.checked));
                 }
             }
+            console.log(state.checked);
         },
         // 订单提交跳转支付页
         carOnSubmit(state, { $router, total }) {
             console.log(total);
             if (total) {
-                localStorage.setItem('total', total)
+                localStorage.setItem('checked', state.checked);
+                localStorage.setItem('total', total);
                 $router.push('/order');
             } else {
                 console.log('购物车为空');
             }
-        }
+        },
+        // 获取购物车列表信息
+        changeCarList(state, payload) {
+            state.carList = payload.list.result;
+            console.log(state.carList.length);
+            if (state.checked.length == 0) {
+                for (let i = 0; i < state.carList.length; i++) {
+                    state.checked.push(false);
+                }
+            }
+            console.log(state.checked);
+        },
     },
-    actions: {},
+    actions: {
+        //获得购物车列表
+        async getCar({ commit }, payload) {
+            const data = await getCarList(payload);
+            console.log(data);
+            commit('changeCarList', {
+                list: data
+            });
+        },
+        //删除购物车列表
+        async deleteCarOne({ commit }, payload) {
+            console.log(payload);
+            const data = await deleteCarList(payload);
+            console.log(data);
+        },
+    },
     getters: {
         total(state) {
             var sum = 0;
             for (var i = 0; i < state.carList.length; i++) {
                 if (state.checked[i] == true)
-                    sum += parseInt(state.carList[i].productPrice);
+                    sum += parseInt(state.carList[i].currentPrice);
             }
             return sum * 100;
         },
@@ -97,24 +134,11 @@ const car = {
         },
     }
 }
-
 const address = {
+    namespaced: true, //添加命名空间
     state: () => ({
-        chosenAddressId: ['1'],
-        list: [{
-                id: '1',
-                name: '张三',
-                tel: '13000000000',
-                address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室',
-                isDefault: true,
-            },
-            {
-                id: '2',
-                name: '李四',
-                tel: '1310000000',
-                address: '浙江省杭州市拱墅区莫干山路 50 号',
-            },
-        ]
+        chosenAddressId: [],
+        addressList: []
     }),
     mutations: {
         // 点击返回上一页
@@ -133,12 +157,50 @@ const address = {
             console.log($router);
             $router.push('/editaddress/' + index);
         },
+        // 获取地址列表信息
+        changeAddressList(state, payload) {
+            state.addressList = [];
+            payload.list.result.forEach(function(item, index, arr) {
+                let addressList = {};
+                addressList.id = item.id;
+                addressList.name = item.name;
+                addressList.tel = item.phone;
+                addressList.address = item.details;
+                // console.log('id:' + item.id);
+                if (localStorage.getItem('chosenAddressId') == item.id) {
+                    addressList.isDefault = true;
+                    state.chosenAddressId[0] = item.id;
+                    state.chosenAddressId = JSON.parse(JSON.stringify(state.chosenAddressId));
+                }
+                if (!localStorage.getItem('chosenAddressId')) {
+                    if (item.level == 0) {
+                        addressList.isDefault = true;
+                        state.chosenAddressId[0] = item.id;
+                        state.chosenAddressId = JSON.parse(JSON.stringify(state.chosenAddressId));
+                        console.log(state.chosenAddressId[0]);
+                    }
+                }
+                state.addressList.push(addressList);
+                // console.log(state.addressList[index]);
+            })
+
+            console.log(state.addressList);
+        },
     },
-    actions: {},
+    actions: {
+        //获得地址列表
+        async getAddress({ commit }, payload) {
+            const data = await getAddressList(payload);
+            console.log(data);
+            commit('changeAddressList', {
+                list: data
+            });
+        },
+    },
     getters: {}
 }
-
 const addaddress = {
+    namespaced: true, //添加命名空间
     state: () => ({
         areaList: {
             province_list: {
@@ -184,24 +246,6 @@ const addaddress = {
         addaddressOnClickLeft(state, $router) {
             $router.go(-1);
         },
-        // 保存
-        addaddressOnSave(state, content) {
-            console.log('save');
-            console.log(localStorage.getItem('token'));
-            console.log(content.name);
-            console.log(content.province + content.city + content.county + content.addressDetail);
-            console.log(content.isDefault);
-            // this.$store.dispatch('addAddress', {
-            //     token:localStorage.getItem('token'),
-            //     getName:content.name,
-            //     getPhone:content.tel,
-            //     address:content.province +
-            //             content.city +
-            //             content.county +
-            //             content.addressDetail,
-            //     status:content.isDefault ? 1 : 2
-            // });
-        },
         // 删除
         addaddressOnDelete(state) {
             console.log('delete');
@@ -216,13 +260,23 @@ const addaddress = {
             } else {
                 state.searchResult = [];
             }
+        }
+    },
+    actions: {
+        // // 添加地址列表
+        async addAddress({ commit }, payload) {
+            console.log(payload);
+            const data = await addAddressList(payload);
+            if (payload.level == '0') {
+                localStorage.setItem('chosenAddressId', data.result[0]);
+            }
+            console.log(data);
         },
     },
-    actions: {},
     getters: {}
 }
-
 const editaddress = {
+    namespaced: true, //添加命名空间
     state: () => ({
         areaList: {
             province_list: {
@@ -262,6 +316,16 @@ const editaddress = {
             }
         },
         searchResult: [],
+        addressinfo: {
+            name: 'zhangsan',
+            tel: '123456789',
+            province: '北京市',
+            city: '北京市',
+            county: '东城区',
+            addressDetail: '123',
+            postalCode: '312500',
+            isDefault: true
+        },
     }),
     mutations: {
         // 点击返回上一页
@@ -275,16 +339,6 @@ const editaddress = {
             console.log(content.name);
             console.log(content.province + content.city + content.county + content.addressDetail);
             console.log(content.isDefault);
-            // this.$store.dispatch('addAddress', {
-            //     token:localStorage.getItem('token'),
-            //     getName:content.name,
-            //     getPhone:content.tel,
-            //     address:content.province +
-            //             content.city +
-            //             content.county +
-            //             content.addressDetail,
-            //     status:content.isDefault ? 1 : 2
-            // });
         },
         // 删除
         editaddressOnDelete(state) {
@@ -301,13 +355,57 @@ const editaddress = {
                 state.searchResult = [];
             }
         },
+        // 获取地址列表信息
+        changeAddressListOne(state, payload) {
+            console.log(payload);
+            payload.list.result.forEach(function(item, index, arr) {
+                if (payload.chooseId == item.id) {
+                    state.addressinfo.id = item.id;
+                    state.addressinfo.name = item.name;
+                    state.addressinfo.tel = item.phone;
+                    state.addressinfo.address = item.details;
+                    if (item.id == localStorage.getItem("chosenAddressId")) {
+                        console.log(11111);
+                        state.addressinfo.isDefault = true;
+                    } else {
+                        state.addressinfo.isDefault = false;
+                        console.log(22222);
+                    }
+                    console.log(state.addressinfo);
+                }
+            })
+        },
     },
-    actions: {},
+    actions: {
+        //获得地址列表
+        async getAddressOne({ commit }, payload) {
+            const data = await getAddressList(payload);
+            console.log(data);
+            commit('changeAddressListOne', {
+                list: data,
+                chooseId: payload.chooseId
+            });
+        },
+        // 修改地址列表
+        async editAddress({ commit }, payload) {
+            console.log(payload);
+            const data = await editAddressList(payload);
+            console.log(data);
+        },
+        //删除
+        async deleteAddressOne({ commit }, payload) {
+            console.log(payload);
+            const data = await deleteAddressList(payload);
+            console.log(data);
+        },
+    },
     getters: {}
 }
-
 const order = {
-    state: () => ({}),
+    namespaced: true, //添加命名空间
+    state: () => ({
+        orderList: []
+    }),
     mutations: {
         // 点击返回上一页
         orderOnClickLeft(state, $router) {
@@ -321,13 +419,39 @@ const order = {
         // 添加地址
         orderAddAddress(state, $router) {
             $router.push('/address')
-        }
+        },
+        // 获取购物车列表信息
+        changeOrderList(state, payload) {
+            // state.orderList = payload.list.result;
+            state.orderList = [];
+            let checked = localStorage.getItem('checked').split(',');
+            checked.forEach((item, index, arr) => {
+                console.log(item, index, arr);
+                if (item == "true") {
+                    state.orderList.push(payload.list.result[index])
+                }
+            })
+            console.log(state.orderList);
+        },
     },
-    actions: {},
+    actions: {
+        //获得购物车列表
+        async getOrder({ commit }, payload) {
+            const data = await getCarList(payload);
+            console.log(data);
+            commit('changeOrderList', {
+                list: data
+            });
+        },
+    },
     getters: {}
 }
 const orderpay = {
-    state: () => ({}),
+    namespaced: true, //添加命名空间/
+    state: () => ({
+        total: localStorage.getItem('total') / 100,
+        radio: ["0"],
+    }),
     mutations: {
         orderpayOnClickLeft(state, $router) {
             $router.go(-1);
@@ -340,6 +464,7 @@ const orderpay = {
     getters: {}
 }
 const ordersuccess = {
+    namespaced: true, //添加命名空间/
     state: () => ({}),
     mutations: {},
     actions: {},

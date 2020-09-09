@@ -1,7 +1,8 @@
 <template>
     <div class="addaddress-container" >
         <!-- 标题 -->
-        <van-nav-bar title="新增收货地址" fixed placeholder z-index="10" left-arrow right-text="保存" @click-left="addaddressOnClickLeft" @click-right="addaddressOnSave" />
+        <van-nav-bar title="新增收货地址" fixed placeholder z-index="10" left-arrow @click-left="addaddressOnClickLeft"  />
+        <!-- <van-nav-bar title="新增收货地址" fixed placeholder z-index="10" left-arrow right-text="保存" @click-left="addaddressOnClickLeft" @click-right="addaddressOnSave" /> -->
         <van-address-edit
         :area-list="areaList"
         show-postal
@@ -10,6 +11,7 @@
         :area-columns-placeholder="['请选择', '请选择', '请选择']"
         @delete="addaddressOnDelete"
         @change-detail="addaddressOnChangeDetail"
+        @save="addaddressOnSave"
         />
     </div>
 </template>
@@ -41,20 +43,32 @@ export default {
     methods: {
         // 返回上一页
         addaddressOnClickLeft() {
-            this.$store.commit('addaddressOnClickLeft',this.$router);
+            this.$store.commit('addaddress/addaddressOnClickLeft',this.$router);
         },
         // 保存
         addaddressOnSave(content) {
-            console.log(content);
-            this.$store.commit('addaddressOnSave',content);
+            this.$store.dispatch('addaddress/addAddress', {
+                token: localStorage.getItem('token'),
+                name: content.name,
+                phone: content.tel,
+                details: content.province +
+                    content.city +
+                    content.county +
+                    content.addressDetail,
+                level: content.isDefault? 0 : 1
+            });
+            this.$store.commit('addaddress/addaddressOnClickLeft',this.$router);
+        
+            // console.log('content'+content);
+            // this.$store.commit('addaddressOnSave',content);
         },
         // 删除
         addaddressOnDelete() {
-            this.$store.commit('addaddressOnDelete',this.$router);
+            this.$store.commit('addaddress/addaddressOnDelete',this.$router);
         },
         // 改变地址后弹出的匹配地址
         addaddressOnChangeDetail(val) {
-            this.$store.commit('addaddressOnChangeDetail',val);
+            this.$store.commit('addaddress/addaddressOnChangeDetail',val);
         },
     }
 };
@@ -62,7 +76,8 @@ export default {
 <style lang='scss'>
 .addaddress-container{
     .van-button{
-        left: -500px;
+        background-color: #4a66f5;
+        border-color: #4a66f5;
     }
 }
 </style>

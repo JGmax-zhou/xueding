@@ -7,7 +7,7 @@ import { Toast } from 'vant';
 // 可以使用自定义配置新建一个 axios 实例
 var instance = axios.create({
     // 基础路径，相当于提出了公共部分
-    baseURL: 'http://47.99.209.108/cart/get?token=abcd',
+    baseURL: 'http://47.99.209.108',
     // 超时事件，在规定的时间内，如果没有请求到数据，就不请求了，返回错误信息
     timeout: 10000,
     // 同意添加请求头信息
@@ -64,7 +64,7 @@ const http = {
             // 引入一个qs的包
             instance.post(url, qs.stringify(params))
                 .then((res) => {
-                    if (res.status === '0') {
+                    if (res.status == '0') {
                         resolve(res)
                     } else {
                         Toast(res.msg)
