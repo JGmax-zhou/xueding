@@ -113,6 +113,7 @@ export default {
         // 列表中的每一个checkbox触发的
         // 全true，则全选按钮亮；反之，则灭
         carAllChange(){
+            console.log(this.num);
             this.$store.commit('car/carAllChange',this.num);
         },
 

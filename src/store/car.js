@@ -1,5 +1,8 @@
+import { getCarList, deleteCarList, getAddressList, addAddressList, editAddressList, deleteAddressList } from "@/utils/api";
+import icon_04 from '../../public/icon/icon_04.png'
+
 const car = {
-    // namespaced: true, //添加命名空间
+    namespaced: true, //添加命名空间
     state: () => ({
         allChecked: [false],
         checked: [],
@@ -91,6 +94,12 @@ const car = {
             }
             console.log(state.checked);
         },
+        SET_NUM: (state, num) => {
+            state.num = num;
+        },
+        SET_TOTAL: (state, total) => {
+            state.total = total;
+        }
     },
     actions: {
         //获得购物车列表
@@ -120,3 +129,5 @@ const car = {
         },
     }
 }
+
+export default car;

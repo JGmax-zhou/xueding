@@ -81,7 +81,7 @@ export default {
     align-items: center;
     // 头部透明
     .van-nav-bar{
-        background: transparent;
+        background: #f5f5f5;
     }
     .van-field__label{
         width: 30px;
