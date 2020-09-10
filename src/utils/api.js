@@ -91,3 +91,8 @@ export function getSchoolList(params) { //下拉菜单校区列表
 export function getSubjectList(params) { //下拉菜单学科列表
     return http.post('/subject/select', params)
 }
+
+//加入购物车接口
+export function addCar(params) {
+    return http.post('/cart/add', params)
+}

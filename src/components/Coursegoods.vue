@@ -10,7 +10,7 @@
             &nbsp;
             <img src="../assets/icon/icon_34.png" alt />
           </span>
-          <span class="title">高一数学秋季精品班(周日10：30）</span>
+          <span class="title">{{navListData.title}}</span>
         </div>
 
         <div class="date">
@@ -24,35 +24,32 @@
           <span class="icon">
             <img src="../assets/icon/icon_35.png" alt />
           </span>
-          <span>舟山市普陀区东海中路141号</span>
+          <span>{{navListData.address}}</span>
         </div>
 
         <div class="lecturer">
-          <div class="information ">
-            <img src="../assets/images/img_08.png" alt />
+          <div class="information " v-for="(item,index) in navListData.teachers" :key="index">
+            <img :src="item.images" alt />
             <div class="info">
-              <div class="name">孙老师</div>
-              <div class="duty">主讲</div>
-            </div>
-          </div>
-          <div class="information ">
-            <img src="../assets/images/img_09.png" alt />
-            <div class="info">
-              <div class="name">王老师</div>
-              <div class="duty">班主任</div>
+              <div class="name">{{item.name}}</div>
+              <div class="duty">{{item.position}}</div>
             </div>
           </div>
         </div>
 
-        <span class="originalPrice">￥1500</span>
-        <span class="currPrice">￥1999</span>
-        <div class="button">加入选课单</div >
+        <span class="originalPrice">￥{{navListData.currentPrice}}</span>
+        <span class="currPrice">￥{{navListData.originnalPrice}}</span>
+        <div class="button" @click="addcar">加入选课单</div >
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import {addCar} from '../utils/api.js'
+import Vue from 'vue';
+import { Toast } from 'vant';
+Vue.use(Toast);
 export default {
   data() {
     return {};
@@ -62,9 +59,31 @@ export default {
 
   computed: {},
 
-  mounted() {},
+  mounted() {
+   
+  },
 
-  methods: {}
+  methods: {
+   async addcar(){
+     localStorage.setItem('msg','abcd')
+      if(localStorage.getItem('msg')){
+     const result = await addCar({
+          token:localStorage.getItem('msg'),
+          id:this.navListData.id
+        })
+        if(result.msg =='success'){
+          Toast('已成功加入选课单');
+        }else if(result.msg =='商品已在购物车内'){
+          Toast('商品已在购物车，请勿重复提交');
+        }
+      }else{
+        this.$router.push('/login')
+      }
+    }
+  },
+  props:[
+    'navListData'
+  ]
 };
 </script>
 <style lang='scss' scoped>
