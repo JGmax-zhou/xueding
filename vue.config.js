@@ -4,6 +4,6 @@ module.exports = {
     devServer: {
         open: true,
         port: 8080,
-        hot: true,//热加载 自动刷新页面
+        hot: true, //热加载 自动刷新页面
     }
 }
