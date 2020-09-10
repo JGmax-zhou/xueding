@@ -5,24 +5,29 @@
 
     <section>
       <!-- 输入手机号，调起手机号键盘 -->
-      <van-field v-model="tel" type="tel" placeholder="请输入手机号或邮箱"/>
+      <van-field v-model="phone" type="tel" placeholder="请输入手机号或邮箱"/>
       <!-- 输入密码 -->
       <van-field v-model="password" placeholder="请输入您的密码" />
-       <van-field v-model="password" placeholder="请再次输入密码" />
-    </section>
+      <van-field v-model="passwordto" placeholder="请再次输入密码" />
 
-    <div class="login-button">
-      <p @click="login">注册</p>
+      <div class="login-button">
+      <p @click="getRegister">注册</p>
     </div>
+    </section>
+    
+
+    
   </div>
 </template>
 
 <script>
+import { getRegister } from '../utils/api'
 export default {
   data() {
     return {
       password: "",
-      tel: "",
+      phone: "",
+      passwordto:""
     };
   },
 
@@ -38,6 +43,14 @@ export default {
     },
     onClickLeft(){
         this.$router.go(-1);
+    },
+    async getRegister(){
+      const result = await getRegister({
+        phone:this.phone,
+        password:this.password
+      })
+      localStorage.setItem('msg',result.msg)
+      this.$router.replace('/passwordToIogin')
     }
   },
 };
