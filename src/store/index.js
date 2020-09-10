@@ -14,6 +14,7 @@ import editaddress from './editaddress'
 import order from './order'
 import orderpay from './orderpay'
 import indexHome from './index-home'
+import indexSeleCourse from './index-SeleCourse' //金刚区导航模块
 import classroom from './classroom'
 const ordersuccess = {
     namespaced: true, //添加命名空间/
@@ -74,6 +75,7 @@ export default new Vuex.Store({
     modules: {
         indexHome,
         classroom,
+        indexSeleCourse, //金刚区选课模块
         car: car,
         address: address,
         addaddress: addaddress,

@@ -73,3 +73,15 @@ export function deleteAddressList(params) {
 //     }
 // }
 // export default api
+export function getIndexList(params) { //首页暑期班与秋季班列表数据
+    return http.post('/course/recommend', params)
+}
+export function getIndexNavList(params) { //首页导航栏列表数据
+    return http.post('/course/select', params)
+}
+export function getSchoolList(params) { //下拉菜单校区列表
+    return http.post('/school/select', params)
+}
+export function getSubjectList(params) { //下拉菜单学科列表
+    return http.post('/subject/select', params)
+}

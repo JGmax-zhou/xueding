@@ -1,4 +1,9 @@
-import { getIndex, getFame } from "../utils/api"
+import {
+    getIndex, //首页导航栏数据请求
+    getFame, //首页名师人气榜数据请求
+    getIndexList, //首页暑假班和秋季班列表数据请求
+    getIndexNavList, //首页导航栏列表数据
+} from "../utils/api"
 export default {
     namespaced: true,
     state: () => ({
@@ -29,6 +34,8 @@ export default {
             },
         ],
         popularityTeacher: '', ////首页名师人气榜
+        indexList: [], //首页暑假班和秋季班列表数据
+        IndexNavList: [], //首页导航栏列表数据
     }),
     mutations: {
         cancelAnimated(state) { //首页导航栏动画效果控制
@@ -52,6 +59,14 @@ export default {
             state.popularityTeacher = payload.result
                 // console.log(state.popularityTeacher)
         },
+        setIndexList(state, payload) { //首页暑假班和秋季班列表数据请求
+            state.indexList = payload.result
+                // console.log(payload.result)
+        },
+        setIndexNavList(state, payload) { //首页导航栏列表数据
+            state.IndexNavList = payload.result
+                // console.log(payload.result)
+        },
     },
     actions: {
         changeit({ commit }, payload) { //首页菜单跳转双向绑定
@@ -63,9 +78,17 @@ export default {
                 // console.log(result)
             commit('setindexTab', result)
         },
-        async getPopularityTeacher({ commit }) { //首页名师人气榜
+        async getPopularityTeacher({ commit }) { //首页名师人气榜数据请求
             const result = await getFame()
             commit('setPopularityTeacher', result)
+        },
+        async getIndexList({ commit }) { //首页暑假班和秋季班列表数据请求
+            const result = await getIndexList()
+            commit('setIndexList', result)
+        },
+        async getIndexNavList({ commit }, payload) { //首页导航栏列表数据
+            const result = await getIndexNavList(payload)
+            commit('setIndexNavList', result)
         },
     }
 }

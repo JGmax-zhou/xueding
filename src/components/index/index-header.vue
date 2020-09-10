@@ -30,7 +30,7 @@
           v-for="(value,index) in indexTab"
           :key="index+10"
           @click="classDow(index)"
-        >{{value}}</li>
+        >{{value.name}}</li>
       </ul>
     </van-popup>
 

@@ -5,7 +5,7 @@
     <!-- tab导航栏 -->
     <van-tabs v-model="active" color="#4966F5" @change="dowNav" swipeable :animated="animated">
       <van-tab v-for="(value,index) in indexTab" :key="index" :title="value.name">
-        <router-view></router-view>
+        <router-view :navList="value.name"></router-view>
       </van-tab>
     </van-tabs>
   </div>
