@@ -39,10 +39,10 @@
     <!-- 暑假班 -->
     <h2>暑假班</h2>
     <!-- 暑假班商品渲染 -->
-    <commodityCard />
+    <commodityCard v-for="(value) in indexList" :key="value.id+1000" :listData="value"/>
     <h2>秋季班</h2>
     <!-- 秋季班商品渲染 -->
-    <commodityCard />
+    <commodityCard v-for="(value) in indexList" :key="value.id" :listData="value"/>
   </div>
 </template>
 
@@ -86,23 +86,6 @@ export default {
           tit: "我的课程",
         },
       ],
-      // popularityTeacher: [
-      //   {
-      //     img: icon13,
-      //     name: "杨老师",
-      //     eb: "浙江大学研究生",
-      //   },
-      //   {
-      //     img: icon14,
-      //     name: "杨老师",
-      //     eb: "浙江大学研究生",
-      //   },
-      //   {
-      //     img: icon15,
-      //     name: "杨老师",
-      //     eb: "浙江大学研究生",
-      //   },
-      // ],
       video: [
         {
           img: img05,
@@ -124,16 +107,21 @@ export default {
   },
 
   computed: {
-    ...mapState(['popularityTeacher'])//首页名师人气榜数据请求
+    ...mapState([
+      'popularityTeacher',//首页名师人气榜数据
+      'indexList'//首页暑假班和秋季班列表数据
+    ])
   },
 
    mounted() {
-    this.getPopularityTeacher()
+    this.getPopularityTeacher()//首页名师人气榜数据请求
+    this.getIndexList()//首页暑期班与秋季班列表数据
   },
 
   methods: {
     ...mapActions([
       'getPopularityTeacher',//首页名师人气榜数据请求
+      'getIndexList',//首页暑期班与秋季班列表数据
       ]),
     SeleCourse(id) {
       this.$router.push("/index-SeleCourse/" + id);

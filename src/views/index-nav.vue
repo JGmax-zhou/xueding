@@ -1,11 +1,16 @@
 <template>
     <div class="navContent">
-        <Coursegoods v-for="(value,index) in 5" :key="index"/>
+        <Coursegoods v-for="(value) in IndexNavList" :key="value.id" :navListData="value"/>
     </div>
 </template>
 <script>
+import { createNamespacedHelpers } from "vuex"; //引入vuex辅助函数
+const { mapState, mapActions } = createNamespacedHelpers(
+  "indexHome"
+); //引入vuex辅助函数
 import Coursegoods from "../components/Coursegoods"
 export default {
+    props:['navList'],
     data() {
         return {
             
@@ -13,7 +18,17 @@ export default {
     },
     components:{
         Coursegoods
-    }
+    },
+    methods: {
+        ...mapActions(['getIndexNavList'])
+    },
+    mounted() {
+        // console.log(this.navList)
+        this.getIndexNavList({subject:this.navList})
+    },
+    computed: {
+        ...mapState(['IndexNavList'])
+    },
 }
 </script>
 <style lang="scss" scoped>

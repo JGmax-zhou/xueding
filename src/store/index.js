@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import indexHome from './index-home'
+import indexHome from './index-home' //首页模块
+import indexSeleCourse from './index-SeleCourse' //金刚区导航模块
 
 Vue.use(Vuex)
 
@@ -53,6 +54,7 @@ export default new Vuex.Store({
 
     },
     modules: {
-        indexHome
+        indexHome, //首页模块
+        indexSeleCourse, //金刚区选课模块
     }
 })

@@ -10,102 +10,100 @@
       >{{value.tit}}</li>
     </ul>
     <!-- 课程列表 -->
-    <Coursegoods v-for="(value,index) in 10" :key="index" />
+    <Coursegoods v-for="(value) in indexList" :key="value.id" :listData="value" />
     <!-- 遮罩层 -->
     <div class="shade" v-show="navlistnum!=-1" @click="shadedow"></div>
     <!-- 校区、学科下拉 -->
-    <div
-      class="XLcontent"
-      v-for="(item,indexr) in navlist"
-      :key="indexr + 1000"
-      v-show="navlistnum==indexr && navlistnum!=2"
-    >
+    <div class="XLcontent" v-show=" navlistnum==0">
       <van-sidebar v-model="activeKey">
         <van-sidebar-item
-          v-for="(value,index) in navlist[indexr].sidehead"
+          v-for="(value,index) in navlist[0].SchoolList"
           :key="index"
-          :title="value.title"
+          :title="value.city"
+          @click="qxys"
         />
       </van-sidebar>
       <!-- 详细地址 -->
       <ul>
-        <li>惠兰雅路丁兰广场教学点</li>
-        <li>惠兰雅路丁兰广场教学点</li>
-        <li>惠兰雅路丁兰广场教学点</li>
+        <li
+          v-for="(value,index) in 4"
+          :key="index"
+          :class="{liBule:Sbule==index}"
+          @click="XQli(index)"
+        >{{navlist[0].SchoolList[activeKey] ? navlist[0].SchoolList[activeKey].detail : ""}}</li>
       </ul>
       <!-- 重置、确定按钮 -->
       <div class="butCZ">重置</div>
       <div class="butOK">确定</div>
     </div>
+    <!-- ----------------------------------------------------- -->
+    <div class="XLcontent" v-show=" navlistnum==1">
+      <van-sidebar v-model="activeKey">
+        <!-- <van-sidebar-item
+          v-for="(value,index) in navlist[1].SchoolList"
+          :key="index"
+          title="全部"
+        />-->
+        <van-sidebar-item title="全部" />
+      </van-sidebar>
+      <!-- 详细地址 -->
+      <ul>
+        <li v-for="(value,index) in navlist[1].SchoolList" :key="index">{{value.name}}</li>
+      </ul>
+      <!-- 重置、确定按钮 -->
+      <div class="butCZ">重置</div>
+      <div class="butOK">确定</div>
+    </div>
+    <!-- ------------------------------------------------ -->
     <!-- 上课形式下拉 -->
     <div class="form" v-show="navlistnum==2">
-      <li v-for="(value,index) in navlist[2].sidehead" :key="index">{{value}}</li>
+      <li v-for="(value,index) in navlist[2].SchoolList" :key="index">{{value}}</li>
     </div>
   </div>
 </template>
 <script>
-import Coursegoods from "../Coursegoods";
+import Coursegoods from "../Coursegoods"; //商品卡片
+import { createNamespacedHelpers } from "vuex"; //引入vuex辅助函数
+const { mapState, mapActions } = createNamespacedHelpers("indexSeleCourse"); //引入vuex辅助函数
+const { mapState: a, mapActions: b } = createNamespacedHelpers("indexHome"); //引入vuex辅助函数
 export default {
   data() {
     return {
       activeKey: 0,
-      navlist: [
-        {
-          tit: "校区",
-          sidehead: [
-            {
-              title: "杭州",
-              content: ["惠兰雅路丁兰广场教学点", "惠兰雅路丁兰广场教学点2"],
-            },
-            {
-              title: "宁波",
-              content: ["惠兰雅路丁兰广场教学点3", "惠兰雅路丁兰广场教学点4"],
-            },
-            {
-              title: "舟山",
-              content: ["惠兰雅路丁兰广场教学点5", "惠兰雅路丁兰广场教学点6"],
-            },
-            {
-              title: "嘉兴",
-              content: ["惠兰雅路丁兰广场教学点7", "惠兰雅路丁兰广场教学点8"],
-            },
-            {
-              title: "绍兴",
-              content: ["惠兰雅路丁兰广场教学点9", "惠兰雅路丁兰广场教学点10"],
-            },
-          ],
-        },
-        {
-          tit: "学科",
-          sidehead: [
-            {
-              title: "中学辅导",
-              content: ["物理", "数学", "化学", "语文", "英语"],
-            },
-            {
-              title: "留学考试",
-              content: ["雅思", "托福", "AP", "STA"],
-            },
-          ],
-        },
-        {
-          tit: "上课形式",
-          sidehead: ["全部", "走读", "在线"],
-        },
-      ],
       navlistnum: -1,
+      Sbule: -1,
     };
+  },
+  mounted() {
+    this.getSchoolList();
+    this.getSubjectList();
+    this.getIndexList();
   },
   components: {
     Coursegoods,
   },
   methods: {
+    ...mapActions([
+      "getSchoolList", //校区选择列表数据请求
+      "getSubjectList", //下拉菜单学科列表数据请求
+    ]),
+    ...b(["getIndexList"]),
     navlistdow(index) {
       this.navlistnum = index;
     },
     shadedow() {
       this.navlistnum = -1;
     },
+    XQli(index){
+      this.Sbule=index
+    },
+    qxys() {
+      this.Sbule = -1;
+    },
+  },
+  computed: {
+    ...mapState(["navlist", "indexList"]),
+    ...a(["indexList"]),
   },
 };
 </script>
@@ -136,11 +134,11 @@ export default {
       background: url(../../assets/icon/icon_20.png) no-repeat right;
     }
     .liactive {
-    background: url(../../assets/icon/icon_41.png) no-repeat right;
-    color:#0798ff ;
+      background: url(../../assets/icon/icon_41.png) no-repeat right;
+      color: #0798ff;
+    }
   }
-  }
-  
+
   .shade {
     position: fixed;
     height: 100%;
@@ -149,12 +147,12 @@ export default {
     // z-index: 0;
     top: 15%;
     bottom: 0;
-    // display: none;//暂时隐藏 
+    // display: none;//暂时隐藏
   }
   .XLcontent {
-    position: absolute;
+    position: fixed;
     left: 0px;
-    top: 40px;
+    top: 100px;
     width: 100%;
     height: 500px;
     background: #eff1f2;
@@ -180,11 +178,16 @@ export default {
       flex: 1;
       padding-left: 20px;
       // padding-top: 20px;
+      margin-bottom: 50px;
+      overflow: auto;
       li {
         font-size: 13px;
         // margin-bottom: 20px;
         height: 60px;
         line-height: 60px;
+      }
+      .liBule {
+        color: #0798ff;
       }
     }
     //   重置确定按钮
@@ -216,9 +219,9 @@ export default {
     }
   }
   .form {
-    position: absolute;
+    position: fixed;
     left: 0px;
-    top: 40px;
+    top: 100px;
     width: 100%;
     background: #fff;
     li {

@@ -1,17 +1,17 @@
 <template>
   <div class="card">
-    <div class="cardWrap" v-for="(value,index) in courseList" :key="index">
+    <div class="cardWrap">
       <div class="cardTitle">
-        <img :src="value.patternImg" alt />
-        <div class="title">{{value.tit}}</div>
-        <span>{{value.introduce}}</span>
+        <img :src="courseList.patternImg" alt />
+        <div class="title">{{listData.title}}</div>
+        <span>{{courseList.introduce}}</span>
       </div>
       <div class="picture">
-        <img v-for="(values,indexs) in value.lecturerImg" :key="indexs" :src="values" alt />
+        <img v-for="(values) in listData.teachers" :key="values.id" :src="values.images" alt />
       </div>
       <div class="cardPrice">
         <p>限时购</p>
-        <span>￥{{value.price}}</span>
+        <span>￥{{listData.currentPrice}}</span>
         <i>起</i>
       </div>
     </div>
@@ -23,9 +23,10 @@ import icon18 from "../../assets/icon/icon_18.png"; //线上图片
 import icon19 from "../../assets/icon/icon_19.png"; //线下小班图片
 import img09 from "../../assets/images/img_09.png"; //讲师头像
 export default {
+  props:['listData'],
   data() {
     return {
-      courseList: [
+      courseList: 
         {
           patternImg: icon17,
           tit: "初三升高一数学暑假培训班",
@@ -33,7 +34,7 @@ export default {
           price: "99",
           lecturerImg: [img09, img09, img09],
         }
-      ],
+      ,
     };
   },
 };
