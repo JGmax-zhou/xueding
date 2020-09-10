@@ -10,14 +10,15 @@
 
         <section>
             <p class="title"><span>限时购</span>秋季班单科报名最低99元十课时</p>
-            <van-cell>
-                <span>高一升高二物理秋季班（周日9：30）</span>
-                <span class="price">￥3999.00</span>
+            <van-cell v-for="(item,index) in orderList" :key="index">
+                <span>{{ item.title }}</span>
+                <span class="price">￥{{ item.currentPrice }}.00</span>
             </van-cell>
-            <van-cell >
+            <!-- {{ orderList }} -->
+            <!-- <van-cell >
                 <span>高二英语秋季班[人教版]</span>
                 <span class="price">￥3999.00</span>
-            </van-cell>
+            </van-cell> -->
         </section>
 
         <van-submit-bar button-text="提交订单" @submit="orderOnSubmit" button-color="#4a66f5">
@@ -40,22 +41,33 @@ export default {
 
     components: {},
 
-    computed: {},
+    computed: {
+        ...mapState({
+            orderList(){
+                return this.$store.state.order.orderList;
+            },
+            getOrder() {
+                return this.$store.state.order.orderList;
+            },
+        }),
+    },
 
-    mounted() {},
+    mounted() {
+        this.$store.dispatch("order/getOrder", { token: localStorage.getItem('token') });
+    },
 
     methods: {
         // 返回上一页
         orderOnClickLeft() {
-            this.$store.commit('orderOnClickLeft',this.$router);
+            this.$store.commit('order/orderOnClickLeft',this.$router);
         },
         // 提交
         orderOnSubmit(){
-            this.$store.commit('orderOnSubmit',this.$router);
+            this.$store.commit('order/orderOnSubmit',this.$router);
         },
         // 添加地址
         orderAddAddress(){
-            this.$store.commit('orderAddAddress',this.$router);
+            this.$store.commit('order/orderAddAddress',this.$router);
         }
     }
 };
@@ -69,7 +81,7 @@ export default {
     align-items: center;
     // 头部透明
     .van-nav-bar{
-        background: transparent;
+        background: #f5f5f5;
     }
     .van-field__label{
         width: 30px;

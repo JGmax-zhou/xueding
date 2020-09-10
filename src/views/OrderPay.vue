@@ -10,7 +10,7 @@
         </section>
         <!-- 支付方式 -->
         <van-cell-group>
-            <van-radio-group v-model="radio">
+            <van-radio-group v-model="radio[0]">
             <van-cell>
                 <span><van-image width="20" :src="icon_38" />
                 <i>微信支付</i>
@@ -43,8 +43,6 @@ import { mapState,mapGetters } from "vuex";
 export default {
     data() {
         return {
-            total:localStorage.getItem('total')/100,
-            radio:0,
             icon_38,
             icon_39,
             icon_40
@@ -53,16 +51,27 @@ export default {
 
     components: {},
 
-    computed: {},
+    computed: {
+        ...mapState({
+            total(){
+                return this.$store.state.orderpay.total;
+            },
+            radio(){
+                return this.$store.state.orderpay.radio;
+            }
+        })
+    },
 
     mounted() {},
 
     methods: {
         orderpayOnClickLeft(){
-            this.$store.commit('orderpayOnClickLeft',this.$router);
+            this.$store.commit('orderpay/orderpayOnClickLeft',this.$router);
         },
         orderpayPay(){
-            this.$store.commit('orderpayPay',this.$router);
+            console.log(this.radio);
+            localStorage.setItem('orderpay/paymethods',this.radio)
+            this.$store.commit('orderpay/orderpayPay',this.$router);
         }
     }
 };

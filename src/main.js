@@ -35,6 +35,9 @@ import {
     CellGroup,
     RadioGroup,
     Radio,
+    Image as VanImage,
+    SwipeCell,
+    Dialog
     // VanImage
 } from 'vant';
 Vue.use(Tabbar);
@@ -65,6 +68,10 @@ Vue.use(CellGroup);
 Vue.use(RadioGroup);
 Vue.use(Radio);
 Vue.use(Popup);
+Vue.use(VanImage);
+Vue.use(Button);
+Vue.use(SwipeCell);
+Vue.use(Dialog);
 
 Vue.config.productionTip = false
 new Vue({

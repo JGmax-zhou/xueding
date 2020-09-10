@@ -26,12 +26,6 @@ export function getClassBackData(params) {
 }
 
 
-// 获取购物车列表
-export function getCarList(params) {
-    return http.post('/', params)
-}
-
-
 //获取手机验证码
 export function getPhoneCode(params) {
     return http.post('/user/sendCode', params)
@@ -44,3 +38,38 @@ export function getRegister(params) {
 export function getPasswordToIogin(params) {
     return http.post('/user/login', params)
 }
+
+export function getCarList(params) {
+    return http.post('/cart/get', params)
+}
+
+export function deleteCarList(params) {
+    return http.post('/cart/del', params)
+}
+
+export function getAddressList(params) {
+    return http.post('/address/get', params)
+}
+
+export function addAddressList(params) {
+    return http.post('/address/add', params)
+}
+
+export function editAddressList(params) {
+    return http.post('/address/update', params)
+}
+
+export function deleteAddressList(params) {
+    return http.post('/address/delete', params)
+}
+
+// const api = {
+//     install(vue) {
+//         // 获取购物车列表
+//         vue.prototype.$getCarList = function(params) {
+//             console.log(111);
+//             return http.post('/cart/get', params)
+//         }
+//     }
+// }
+// export default api

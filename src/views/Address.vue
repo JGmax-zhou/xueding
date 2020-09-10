@@ -4,11 +4,13 @@
         <van-nav-bar title="我的收货地址" fixed placeholder z-index="10" left-arrow @click-left="addressOnClickLeft" />
         <van-address-list
         v-model="chosenAddressId[0]"
-        :list="list"
+        :list="addressList"
         default-tag-text="默认"
         @add="addressOnAdd"
         @edit="addressOnEdit"
+        @select="changeChosenAddressId"
         />
+        <!-- <van-button class="changeChosenAddressId" @click="changeChosenAddressId">确认更改地址</van-button> -->
     </div>
 </template>
 
@@ -27,32 +29,38 @@ export default {
             chosenAddressId(){
                 return this.$store.state.address.chosenAddressId
             },
-            list(){
-                return this.$store.state.address.list
+            addressList(){
+                return this.$store.state.address.addressList
             },
         })
     },
 
-    mounted() {},
+    mounted() {
+        this.$store.dispatch("address/getAddress", { token: localStorage.getItem('token') });
+    },
 
     methods: {
         // 新增地址
         addressOnAdd() {
-            this.$store.commit('addressOnAdd',this.$router);
+            this.$store.commit('address/addressOnAdd',this.$router);
         },
         // 编辑地址
         addressOnEdit(item, index) {
-            console.log('编辑地址:' + index);
-            // this.$router.push('/editaddress/' + index);
-            console.log(this.$router);
-            this.$store.commit('addressOnEdit',{
+            console.log(item.id);
+            this.$store.commit('address/addressOnEdit',{
                 $router:this.$router,
-                index:index}
+                index:item.id}
             );
+        },
+        // 确认更改
+        changeChosenAddressId(item,index){
+            localStorage.setItem('chosenAddressId',item.id);
+            this.$store.state.address.chosenAddressId=JSON.parse(JSON.stringify(this.$store.state.address.chosenAddressId));
+            this.addressOnClickLeft();
         },
         // 返回上一页
         addressOnClickLeft() {
-            this.$store.commit('addressOnClickLeft',this.$router);
+            this.$store.commit('address/addressOnClickLeft',this.$router);
         },
     }
 };
@@ -66,7 +74,7 @@ export default {
     align-items: center;
     // 头部透明
     .van-nav-bar {
-        background: transparent;
+        background: #f5f5f5;
     }
     // 地址项目
     .van-address-edit__fields{
@@ -104,11 +112,16 @@ export default {
     // 地址颜色
     .van-address-item__address{
         color: #999;
+        width: 240px;
     }
     // 默认标签
     .van-tag{
         padding: 3px 6px;
         font-size: 10px;
+    }
+    .van-address-list{
+        height: 100%;
+        padding: 0.32rem 0.32rem 0.6rem;
     }
     .van-address-list__bottom {
         position: relative;
@@ -117,6 +130,13 @@ export default {
         border-radius: 4px;
         box-shadow: 5pt 3pt 10pt -1pt #EDEDED;
     }
+    // .changeChosenAddressId{
+    //     color: #4a66f5;
+    //     width: 340px;
+    //     border-radius: 4px;
+    //     box-shadow: 5pt 3pt 10pt -1pt #EDEDED;
+    //     height: 45px;
+    // }
 
 }
 </style>
