@@ -5,6 +5,11 @@
       <!-- <template #right>
       </template>-->
     </van-nav-bar>
+    <div>
+      111
+      <li v-for="(item,index) in getDetailDate " :key="index">{{item}}</li>
+    </div>
+
     <!-- 轮播图 -->
     <div class="delail_i">
       <img src="../assets/images/img_23.png" alt />
@@ -94,6 +99,10 @@
 
 
 <script>
+import { mapState } from "vuex"; //引入vuex辅助函数
+// import { createNamespacedHelpers } from "vuex"; //引入vuex辅助函数
+
+// const { mapState, mapActions } = createNamespacedHelpers("Delail"); //引入vuex辅助函数
 export default {
   data() {
     return {
@@ -115,17 +124,21 @@ export default {
           p: "9月18日 周五19:00-21:00",
         },
       ],
-      id: "",
     };
   },
+  computed: {
+    // ...mapState(["getDelailDate"]),
+    ...mapState(["getDetailDate"]),
+  },
   mounted() {
-    this.id = this.$route.params.id;
-    this.$store.dispatch("getDetailInfo");
+    this.$store.dispatch("getData", {
+    // type: this.type,
+    });
+    // console.log(this.getDetailDate);
+    // this.getdeta();
   },
   methods: {
-    // onCickLeft() {
-    //   this.$router.go(-1);
-    // },
+    // ...mapActions(["getdeta"]),
   },
 };
 </script>
