@@ -9,13 +9,13 @@
         <!-- 滤镜 -->
         <div class="BGfilter"></div>
         <!-- 背景图片 -->
-        <img src="../assets/images/img_06.png" alt />
+        <img :src="jsxq.images" alt />
       </div>
       <div class="nameMessageWrap">
-        <img src="../assets/images/img_06.png" alt />
+        <img :src="jsxq.images" alt />
         <!-- 姓名学校 -->
         <div class="nameMessage">
-          <h3>高岩</h3>
+          <h3>{{jsxq.name}}</h3>
           <p>学鼎宁波学校</p>
           <!-- 咨询 -->
           <div class="consult">
@@ -43,12 +43,13 @@
                   <input type="text" id="consultName" placeholder="请输入您的名字" value />
                 </div>
                 <div class="shouji wrap">
-                  <input type="text" id="consultName" placeholder="请输入您的手机" value />
+                  <input type="text" id="consultShouji" placeholder="请输入您的手机" value />
                 </div>
                 <div class="nianji wrap">
                   <input
                     type="text"
-                    id="consultName"
+                    id="consultNianji"
+                    ref="consultNianji"
                     placeholder="请选择年级"
                     value
                     @focus.stop="seleGrades"
@@ -57,11 +58,15 @@
               </van-popup>
               <div class="seleGrade" v-show="seleGrade">
                 <div class="seleGradeBack" @click="retreat">&le;</div>
-                <div class="queding" v-show="xueduan.switch">确定</div>
+                <div class="queding" v-show="xueduan.switch" @click="XZWC">确定</div>
                 <!-- 年级选择 -->
                 <div class="seleXdWrap">
                   <!-- 选择学段 -->
-                  <div class="seleXD" :class="{pitchOn:xueduan.sign!=1}" @click="QXSY">{{xueduan.tit}}</div>
+                  <div
+                    class="seleXD"
+                    :class="{pitchOn:xueduan.sign!=1}"
+                    @click="QXSY"
+                  >{{xueduan.tit}}</div>
                   <div
                     class="seleNJ"
                     v-show="xueduan.sign==1"
@@ -73,7 +78,7 @@
                   <li
                     v-for="(value,index) in XQXL"
                     :key="index"
-                    @click="secondary(index,value)"
+                    @click="secondarys(index,value)"
                   >{{value}}</li>
                 </ul>
               </div>
@@ -83,17 +88,44 @@
         </div>
       </div>
     </header>
-    <div style="height:3000px"></div>
+    <!-- 基本信息 -->
+    <main class="basicsMessage">
+      <h2 class="jbxx">基本信息</h2>
+      <h3 class="ejbt">教授课程</h3>
+      <p class="neirong">听力，口语</p>
+      <h3 class="ejbt">教师资质</h3>
+      <p class="neirong">高级中学教师资格证</p>
+      <h3 class="ejbt">上课校区</h3>
+      <p class="neirong">{{jsxq.school}}</p>
+      <img class="zhaop" :src="jsxq.images" alt />
+    </main>
+    <!-- 老师简介 -->
+    <main class="basicsMessage">
+      <h2 class="jbxx">老师简介</h2>
+      <h3 class="ejbt">个人简介</h3>
+      <p class="neirong">杨宁，浙江杭州人，杭州新东方八年中考教师。科班出生，自成教学体系，上课通俗易懂，幽默生动；对学生认真负责，亲和力强，亦师亦友；课程质量高，教学效果突出，深受学生和家长喜爱。</p>
+      <h3 class="ejbt">授课风格</h3>
+      <ul class="neirong">
+        <li class="neirongLi" v-for="(value,index) in 3" :key="index+10000">{{jsxq.style}}</li>
+      </ul>
+    </main>
   </div>
 </template>
 <script>
-import { mapState } from "vuex"; //引入vuex辅助函数
+import { createNamespacedHelpers } from "vuex"; //引入vuex辅助函数
+const { mapState, mapMutations, mapActions } = createNamespacedHelpers(
+  "detailsTeacher"
+); //引入vuex辅助函数
 export default {
   data() {
     return {
       show: false,
       seleGrade: false,
     };
+  },
+  mounted() {
+    // console.log(this.$route.params.id);
+    this.getTeacherDetails({ id: this.$route.params.id });
   },
   computed: {
     ...mapState([
@@ -102,15 +134,21 @@ export default {
       "collectnum", //教师被收藏的总数
       "XQXL", //学历下拉
       "xueduan", //已选择学段
+      "xueduan", //选择的年级数据
+      "jsxq", //教师详情数据
     ]),
   },
   methods: {
+    ...mapMutations(["collectBut", "secondary", "QXSY"]),
+    ...mapActions([
+      "getTeacherDetails", //教师详情数据请求
+    ]),
     Teacherback() {
       //返回上一页
       this.$router.go(-1);
     },
     collectBut() {
-      this.$store.commit("collectBut");
+      this.collectBut();
     },
     showPopup() {
       //咨询弹出层
@@ -126,13 +164,21 @@ export default {
       //选择年级取消
       this.seleGrade = false;
     },
-    secondary(index, value) {
+    secondarys(index, value) {
       //选择年级二级菜单
-      this.$store.commit("secondary", { id: index, tit: value });
+      // console.log(index, value);
+      this.secondary({ id: index, tit: value });
     },
-    QXSY(){
-       this.$store.commit('QXSY')
-    }
+    QXSY() {
+      this.QXSY();
+    },
+    XZWC() {
+      //下拉选择完成确定
+      this.$refs.consultNianji.value =
+        this.xueduan.tit + " " + this.xueduan.tits;
+      // console.log(this.xueduan);
+      this.seleGrade = false;
+    },
   },
 };
 </script>
@@ -144,7 +190,7 @@ export default {
   width: 100%;
   .detailsTeacherBack {
     //返回上一页按钮
-    position: fixed;
+    position: absolute;
     top: 10px;
     left: 15px;
     z-index: 3;
@@ -306,7 +352,8 @@ export default {
                 font-size: 30px;
                 margin-top: 15px;
               }
-              .queding{//确定按钮
+              .queding {
+                //确定按钮
                 color: #1fb895;
                 position: absolute;
                 right: 15px;
@@ -379,6 +426,50 @@ export default {
           }
         }
       }
+    }
+  }
+  .basicsMessage {
+    //基本资料
+    border-bottom: 9px #f3f3f3 solid;
+    // margin-bottom: 50px;
+    padding-bottom: 20px;
+    .jbxx {
+      //基本信息
+      font-size: 20px;
+      margin: 20px 0px 0px 15px;
+    }
+    .ejbt {
+      //二级标题
+      font-size: 16px;
+      margin: 20px 0px 0px 15px;
+    }
+    .neirong {
+      //内容
+      font-size: 14px;
+      margin: 15px 15px 0px 15px;
+      color: #999;
+    }
+    ul{
+       font-size: 14px;
+      margin: 15px 15px 0px 15px;
+      color: #999;
+      display: flex;
+      flex-wrap: wrap;
+      .neirongLi{
+        border: 1px solid #40d29d;
+        width: 70px;
+        height: 30px;
+        border-radius: 3px;
+        text-align: center;
+        line-height: 30px;
+        margin-right: 10px;
+      }
+    }
+    .zhaop {
+      //照片
+      width: 96px;
+      height: 96px;
+      margin: 15px 0px 0px 15px;
     }
   }
 }

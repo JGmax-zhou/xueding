@@ -21,3 +21,6 @@ export function getSchoolList(params) { //下拉菜单校区列表
 export function getSubjectList(params) { //下拉菜单学科列表
     return http.post('/subject/select', params)
 }
+export function getTeacherDetails(params) { //教师详情页
+    return http.post('/teacher/select', params)
+}

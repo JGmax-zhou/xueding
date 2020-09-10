@@ -89,6 +89,7 @@ export default {
         async getIndexNavList({ commit }, payload) { //首页导航栏列表数据
             const result = await getIndexNavList(payload)
             commit('setIndexNavList', result)
+                // console.log(result);
         },
     }
 }

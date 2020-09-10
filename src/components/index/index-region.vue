@@ -10,7 +10,7 @@
       >{{value.tit}}</li>
     </ul>
     <!-- 课程列表 -->
-    <Coursegoods v-for="(value) in indexList" :key="value.id" :listData="value" />
+    <Coursegoods v-for="(value) in IndexNavList" :key="value.id" :listData="value" />
     <!-- 遮罩层 -->
     <div class="shade" v-show="navlistnum!=-1" @click="shadedow"></div>
     <!-- 校区、学科下拉 -->
@@ -29,12 +29,12 @@
           v-for="(value,index) in 4"
           :key="index"
           :class="{liBule:Sbule==index}"
-          @click="XQli(index)"
+          @click="XQli({sy:index,zhi:navlist[0].SchoolList[activeKey].detail,a:0})"
         >{{navlist[0].SchoolList[activeKey] ? navlist[0].SchoolList[activeKey].detail : ""}}</li>
       </ul>
       <!-- 重置、确定按钮 -->
       <div class="butCZ">重置</div>
-      <div class="butOK">确定</div>
+      <div class="butOK" @click="queding">确定</div>
     </div>
     <!-- ----------------------------------------------------- -->
     <div class="XLcontent" v-show=" navlistnum==1">
@@ -48,16 +48,25 @@
       </van-sidebar>
       <!-- 详细地址 -->
       <ul>
-        <li v-for="(value,index) in navlist[1].SchoolList" :key="index">{{value.name}}</li>
+        <li
+          v-for="(value,index) in navlist[1].SchoolList"
+          :key="index"
+          :class="{liBule:Sbule==index}"
+          @click="XQli({sy:index,zhi:value.name,a:1})"
+        >{{value.name}}</li>
       </ul>
       <!-- 重置、确定按钮 -->
       <div class="butCZ">重置</div>
-      <div class="butOK">确定</div>
+      <div class="butOK" @click="queding">确定</div>
     </div>
     <!-- ------------------------------------------------ -->
     <!-- 上课形式下拉 -->
     <div class="form" v-show="navlistnum==2">
-      <li v-for="(value,index) in navlist[2].SchoolList" :key="index">{{value}}</li>
+      <li
+        v-for="(value,index) in navlist[2].SchoolList"
+        :key="index"
+        @click="XQli({zhi:value,a:2})"
+      >{{value}}</li>
     </div>
   </div>
 </template>
@@ -72,12 +81,15 @@ export default {
       activeKey: 0,
       navlistnum: -1,
       Sbule: -1,
+      zhi: { index: -1, value: "" },
     };
   },
   mounted() {
-    this.getSchoolList();
+    this.getIndexNavList();
     this.getSubjectList();
-    this.getIndexList();
+    // this.getIndexList();
+    this.getSchoolList()
+    // console.log(this.navlist[0]);
   },
   components: {
     Coursegoods,
@@ -87,23 +99,49 @@ export default {
       "getSchoolList", //校区选择列表数据请求
       "getSubjectList", //下拉菜单学科列表数据请求
     ]),
-    ...b(["getIndexList"]),
+    ...b(["getIndexList",
+    'getIndexNavList',////校区选择列表数据请求可筛选
+    ]),
     navlistdow(index) {
       this.navlistnum = index;
     },
     shadedow() {
       this.navlistnum = -1;
     },
-    XQli(index){
-      this.Sbule=index
+    XQli(index) {
+      //校区列表按下暂时赋值
+      //  console.log(1);
+      this.Sbule = index.sy;
+      this.zhi.value = index.zhi;
+      this.zhi.index = index.a;
+      // console.log(this.zhi);
+      // this.$store.state.indexSeleCourse.navlist[0].tit=index.zhi
+      if (this.zhi.index == 2) {
+        this.$store.state.indexSeleCourse.navlist[2].tit = this.zhi.value;
+        this.navlistnum = -1;
+      }
     },
     qxys() {
       this.Sbule = -1;
     },
+    queding() {
+      //下拉确认赋值
+      // console.log(1);
+      if (this.zhi.index == 0) {
+        this.$store.state.indexSeleCourse.navlist[0].tit = this.zhi.value;
+        this.navlistnum = -1;
+      }
+      if (this.zhi.index == 1) {
+        this.$store.state.indexSeleCourse.navlist[1].tit = this.zhi.value;
+        this.getIndexNavList({subject:this.zhi.value})
+        this.navlistnum = -1;
+      }
+       
+    },
   },
   computed: {
     ...mapState(["navlist", "indexList"]),
-    ...a(["indexList"]),
+    ...a(["indexList",'IndexNavList']),
   },
 };
 </script>
@@ -130,8 +168,13 @@ export default {
     z-index: 10;
     height: 50px;
     li {
+      width: 80px;
+      text-align: right;
       padding-right: 15px;
       background: url(../../assets/icon/icon_20.png) no-repeat right;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .liactive {
       background: url(../../assets/icon/icon_41.png) no-repeat right;
