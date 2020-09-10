@@ -5,10 +5,9 @@
       <p @click="register">注册</p>
     </div>
     <h2>密码登录</h2>
-
     <section>
       <!-- 输入手机号，调起手机号键盘 -->
-      <van-field v-model="tel" type="tel" placeholder="请输入手机号或账号" />
+      <van-field v-model="phone" type="tel" placeholder="请输入手机号或账号" />
       <!-- 输入密码 -->
       <van-field v-model="password" placeholder="请输入密码" />
     </section>
@@ -20,11 +19,12 @@
 </template>
 
 <script>
+import { getPasswordToIogin } from "../utils/api";
 export default {
   data() {
     return {
       password: "",
-      tel: "",
+      phone: "",
     };
   },
 
@@ -41,9 +41,26 @@ export default {
     register() {
       this.$router.push("/register");
     },
-    onClickX(){
-        this.$router.go(-1);
-    }
+    onClickX() {
+      this.$router.go(-1);
+    },
+    async login() {
+      // const resul =  getPasswordToIogin({
+      //   phone: this.phone,
+      //   password: this.password,
+      // });
+      let resul = ''
+      getPasswordToIogin({
+        phone: this.phone,
+        password: this.password,
+      }).then((res) => {
+        resul = res;
+        console.log(111);
+        localStorage.setItem("msg", resul.msg);
+        this.$router.replace("/index");
+      })
+      
+    },
   },
 };
 </script>
@@ -104,6 +121,9 @@ export default {
       text-align: center;
       line-height: 41px;
     }
+  }
+  .van-field__body > input {
+    background: #f8f8f8;
   }
 }
 </style>

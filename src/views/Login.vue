@@ -8,16 +8,17 @@
 
     <section>
       <van-cell-group>
-         <van-field v-model="value" label="+86" placeholder="请输入手机号" />
+        <van-field v-model="phone" center clearable label="+86" placeholder="请输入手机号">
+        <template #button>
+          <van-button size="small" type="primary" @click="getPhonCode">发送验证码</van-button>
+        </template>
+      </van-field>
+        
       </van-cell-group>
     </section>
 
     <section>
-      <van-field v-model="sms" center clearable label="短信验证码" placeholder="请输入短信验证码">
-        <template #button>
-          <van-button size="small" type="primary">发送验证码</van-button>
-        </template>
-      </van-field>
+       <van-field v-model="templateId" label="短信验证码" placeholder="请输入短信验证码" />
     </section>
     <span @click="PasswordToIogin">密码登陆</span>
 
@@ -28,11 +29,14 @@
 </template>
 
 <script>
+
+import { getPhoneCode,userlogin } from '../utils/api'
 export default {
   data() {
     return {
-      value: "",
-      sms: "",
+      phone: "",
+      templateId: "",
+      code:""
      
     };
   },
@@ -47,11 +51,21 @@ export default {
        PasswordToIogin(){
           this.$router.push('/PasswordToIogin')
       },
-      login(){
-          this.$router.push('/index')
+       async login(){
+           const result = userlogin({
+            phone: this.phone,
+            code:this.code
+       })
+
       },
       onClickX(){
           this.$router.go(-1);
+      },
+       async getPhonCode(){
+          const result = getPhoneCode({
+            phone: this.phone,
+            templateId: '537707'
+       })
       }
   },
 };
@@ -115,5 +129,17 @@ export default {
         line-height: 41px;
     }
   }
+  .van-button__text{
+    text-align: center;
+    margin-right: 0;
+  }
+  .van-button{
+    background: #f8f8f8;
+    border: 1PX solid #f8f8f8;
+  }
+  .van-field__body>input{
+    background: #f8f8f8;
+  }
+  
 }
 </style>
