@@ -34,9 +34,13 @@ export function getPhoneCode(params) {
 export function getRegister(params) {
     return http.post('/user/register', params)
 }
-//登录
+//账号密码登录
 export function getPasswordToIogin(params) {
     return http.post('/user/login', params)
+}
+//验证码登录
+export function getYZMlogin(params) {
+    return http.post('/user/getCode', params)
 }
 
 export function getCarList(params) {
