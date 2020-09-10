@@ -5,6 +5,11 @@
       <!-- <template #right>
       </template>-->
     </van-nav-bar>
+    <div>
+      111
+      <li v-for="(item,index) in getDetailDate " :key="index">{{item}}</li>
+    </div>
+
     <!-- 轮播图 -->
     <div class="delail_i">
       <img src="../assets/images/img_23.png" alt />
@@ -71,21 +76,10 @@
         </div>
         <hr />
         <!-- 第一讲  诗歌 -->
-        <div class="delail_poetry_one">
-          <span v-for="(item,index) in  poetry" class="delail_poetry_one_s1" :key="index">{{item.span}}</span>
-          <b v-for="(item,index) in  poetry" class="delail_poetry_one_s2" :key="index">{{item.title}}</b>
-          <p v-for="(item,index) in  poetry" class="delail_poetry_one_p" :key="index">{{item.p}}</p>
-        </div>
-        <div class="delail_poetry_one">
-          <span class="delail_poetry_one_s1">第02讲</span>
-
-          <b class="delail_poetry_one_s2">诗歌：鉴赏常考题材之咏物传志</b>
-          <p class="delail_poetry_one_p">9月11日 周五19:00-21:00</p>
-        </div>
-        <div class="delail_poetry_one">
-          <span class="delail_poetry_one_s1">第03讲</span>
-          <b class="delail_poetry_one_s2">诗歌：常见意向梳理</b>
-          <p class="delail_poetry_one_p">9月18日 周五19:00-21:00</p>
+        <div v-for="(item,index) in  poetry" :key="index" class="delail_poetry_one">
+          <span class="delail_poetry_one_s1">{{item.span}}</span>
+          <b class="delail_poetry_one_s2">{{item.title}}</b>
+          <p class="delail_poetry_one_p">{{item.p}}</p>
         </div>
       </div>
     </div>
@@ -105,6 +99,10 @@
 
 
 <script>
+import { mapState } from "vuex"; //引入vuex辅助函数
+// import { createNamespacedHelpers } from "vuex"; //引入vuex辅助函数
+
+// const { mapState, mapActions } = createNamespacedHelpers("Delail"); //引入vuex辅助函数
 export default {
   data() {
     return {
@@ -115,18 +113,32 @@ export default {
           title: "诗歌：常见意向梳理",
           p: "9月4日 周五19:00-21:00",
         },
-        // {
-        //   span: "第02讲",
-        //   title: "诗歌：鉴赏常考题材之咏物传志",
-        //   p1: "9月11日 周五19:00-21:00",
-        // },
-        // {
-        //   span: "第03讲",
-        //   title: "诗歌：常见意向梳理",
-        //   p: "9月18日 周五19:00-21:00",
-        // },
+        {
+          span: "第02讲",
+          title: "诗歌：鉴赏常考题材之咏物传志",
+          p: "9月11日 周五19:00-21:00",
+        },
+        {
+          span: "第03讲",
+          title: "诗歌：常见意向梳理",
+          p: "9月18日 周五19:00-21:00",
+        },
       ],
     };
+  },
+  computed: {
+    // ...mapState(["getDelailDate"]),
+    ...mapState(["getDetailDate"]),
+  },
+  mounted() {
+    this.$store.dispatch("getData", {
+    // type: this.type,
+    });
+    // console.log(this.getDetailDate);
+    // this.getdeta();
+  },
+  methods: {
+    // ...mapActions(["getdeta"]),
   },
 };
 </script>
@@ -305,7 +317,7 @@ $b-color: #f8f8f8;
       color: $color;
       margin-left: 5px;
       position: absolute;
-      top: -47px;
+      top: -55px;
       margin-top: 68px;
       margin-left: 7px;
     }
@@ -350,7 +362,7 @@ $b-color: #f8f8f8;
     }
     //第一讲诗歌
     .delail_poetry_one {
-      margin-top: 10px;
+      margin-top: 25px;
       margin-left: 39px;
       .delail_poetry_one_s1 {
         font-size: 13px;

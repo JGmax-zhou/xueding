@@ -58,6 +58,12 @@ export function addAddressList(params) {
 export function editAddressList(params) {
     return http.post('/address/update', params)
 }
+//详情页
+export function getDelail(params) {
+    return http.post('/course/recommend', params)
+}
+
+
 
 export function deleteAddressList(params) {
     return http.post('/address/delete', params)
