@@ -6,11 +6,11 @@
 
 /* 搜索框 */
 
-.van-field__body>input {
+.headerWrap .van-field__body>input {
     background: #eee;
 }
 
-.van-search__content {
+.headerWrap .van-search__content {
     background: #eee;
     border-radius: 3px;
 }
