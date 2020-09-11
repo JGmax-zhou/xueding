@@ -34,9 +34,13 @@ export function getPhoneCode(params) {
 export function getRegister(params) {
     return http.post('/user/register', params)
 }
-//登录
+//账号密码登录
 export function getPasswordToIogin(params) {
     return http.post('/user/login', params)
+}
+//验证码登录
+export function getYZMlogin(params) {
+    return http.post('/user/getCode', params)
 }
 
 export function getCarList(params) {
@@ -90,4 +94,9 @@ export function getSchoolList(params) { //下拉菜单校区列表
 }
 export function getSubjectList(params) { //下拉菜单学科列表
     return http.post('/subject/select', params)
+}
+
+//加入购物车接口
+export function addCar(params) {
+    return http.post('/cart/add', params)
 }

@@ -37,7 +37,8 @@ import {
     Radio,
     Image as VanImage,
     SwipeCell,
-    Dialog
+    Dialog,
+    Sticky
     // VanImage
 } from 'vant';
 Vue.use(Tabbar);
@@ -72,6 +73,7 @@ Vue.use(VanImage);
 Vue.use(Button);
 Vue.use(SwipeCell);
 Vue.use(Dialog);
+Vue.use(Sticky);
 
 Vue.config.productionTip = false
 new Vue({

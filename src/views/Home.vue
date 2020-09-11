@@ -13,9 +13,11 @@
         placeholder
       >{{item.title}}</van-tabbar-item>
     </van-tabbar>
+    <car />
   </div>
 </template>
 <script>
+import car from '../components/car'
 export default {
   data() {
     return {
@@ -57,6 +59,9 @@ export default {
       sessionStorage.setItem("homeIndex", this.active);
     },
   },
+  components:{
+    car
+  }
 };
 </script>
 
