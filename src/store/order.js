@@ -2,7 +2,8 @@ import { getCarList, deleteCarList, getAddressList, addAddressList, editAddressL
 const order = {
     namespaced: true, //添加命名空间
     state: () => ({
-        orderList: []
+        orderList: [],
+        chosenAddressIdValue: localStorage.getItem('chosenAddressIdValue'),
     }),
     mutations: {
         // 点击返回上一页
@@ -31,6 +32,15 @@ const order = {
             })
             console.log(state.orderList);
         },
+        changeAddressValue(state, payload) {
+            payload.list.result.forEach((item, index, arr) => {
+                if (item.id == localStorage.getItem('chosenAddressId')) {
+                    console.log(item.details);
+                    localStorage.setItem('chosenAddressIdValue', item.details);
+                    state.chosenAddressIdValue = item.details;
+                }
+            })
+        },
     },
     actions: {
         //获得购物车列表
@@ -38,6 +48,14 @@ const order = {
             const data = await getCarList(payload);
             console.log(data);
             commit('changeOrderList', {
+                list: data
+            });
+        },
+        //获得默认地址列表
+        async getAddressValue({ commit }, payload) {
+            const data = await getAddressList(payload);
+            console.log(data);
+            commit('changeAddressValue', {
                 list: data
             });
         },

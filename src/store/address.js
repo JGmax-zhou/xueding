@@ -48,9 +48,11 @@ const address = {
                 state.addressList.push(addressList);
                 // console.log(state.addressList[index]);
             })
-
             console.log(state.addressList);
         },
+        changeChosenAddressId(state, id) {
+            localStorage.setItem('chosenAddressId', id);
+        }
     },
     actions: {
         //获得地址列表

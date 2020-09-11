@@ -54,8 +54,8 @@ export default {
         },
         // 确认更改
         changeChosenAddressId(item,index){
-            localStorage.setItem('chosenAddressId',item.id);
-            this.$store.state.address.chosenAddressId=JSON.parse(JSON.stringify(this.$store.state.address.chosenAddressId));
+            this.$store.dispatch("address/getAddress", { token: localStorage.getItem('token') });
+            this.$store.commit('address/changeChosenAddressId',item.id);
             this.addressOnClickLeft();
         },
         // 返回上一页

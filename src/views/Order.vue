@@ -35,7 +35,6 @@ import { mapState,mapGetters } from "vuex";
 export default {
     data() {
         return {
-            chosenAddressIdValue:localStorage.getItem('chosenAddressIdValue'),
             total:localStorage.getItem('total')
         };
     },
@@ -50,11 +49,15 @@ export default {
             getOrder() {
                 return this.$store.state.order.orderList;
             },
+            chosenAddressIdValue() {
+                return this.$store.state.order.chosenAddressIdValue;
+            },
         }),
     },
 
     mounted() {
         this.$store.dispatch("order/getOrder", { token: localStorage.getItem('token') });
+        this.$store.dispatch("order/getAddressValue", { token: localStorage.getItem('token') });
     },
 
     methods: {
@@ -111,6 +114,11 @@ export default {
     .van-cell__value{
         display: flex;
         justify-content: space-between;
+        span{
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+        }
     }
     section{
         background-color: #fff;
