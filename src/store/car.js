@@ -110,6 +110,12 @@ const car = {
                 list: data
             });
         },
+        // 删除购物车列表
+        async deleteCarOne({ commit }, payload) {
+            console.log(payload);
+            const data = await deleteCarList(payload);
+            console.log(data);
+        },
     },
     getters: {
         total(state) {

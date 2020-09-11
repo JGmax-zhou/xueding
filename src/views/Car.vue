@@ -23,7 +23,9 @@
                                 <van-image width="12" :src="icon_04" />
                                 {{ item.time }}</p>
                             <p>
-                                <img v-for="(titem,tindex) in item.teachers" :key="tindex" :src="titem.images" alt="" width="50px" height="50px">
+                                <a v-for="(titem,tindex) in item.teachers" :key="tindex" >
+                                    <img v-if="titem" :src="titem.images" alt="" width="50px" height="50px">
+                                </a>
                             </p>
                             <p><span>￥{{ item.currentPrice }} </span><em>/十课时</em></p>
                             <p><i>限时购</i>秋季班单科报名最低99元十课时</p>
@@ -136,6 +138,16 @@ export default {
             });
             this.$store.dispatch("car/getCar", { token: localStorage.getItem('token') });
         }
+    },
+    beforeRouteEnter (to, from, next) {
+        // 在渲染该组件的对应路由被 confirm 前调用
+        // 不！能！获取组件实例 `this`
+        // 因为当守卫执行前，组件实例还没被创建
+        if(localStorage.getItem('token')){
+            next();
+        }else{
+            next('login');
+        }        
     }
 };
 </script>
@@ -146,6 +158,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 50px;
     .van-swipe-cell{
         padding-left: 15px;
         width: 100%;
